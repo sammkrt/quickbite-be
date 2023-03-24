@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<QuickBiteContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("QuickBiteContext") ?? throw new InvalidOperationException("Connection string 'QuickBiteContext' not found.")));
 
 // Add services to the container.
 
