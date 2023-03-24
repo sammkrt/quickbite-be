@@ -12,5 +12,5 @@ using QuickBiteBE.Models;
         {
         }
 
-        public DbSet<QuickBiteBE.Models.User> Users { get; set; } = default!;
+        public DbSet<User> Users { get; set; } = default!;
     }
