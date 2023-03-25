@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using QuickBiteBE.Data;
 using QuickBiteBE.Models;
 
 namespace QuickBiteBE.Controllers
@@ -24,10 +25,11 @@ namespace QuickBiteBE.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-          if (_context.Users == null)
-          {
-              return NotFound();
-          }
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
+
             return await _context.Users.ToListAsync();
         }
 
@@ -35,10 +37,11 @@ namespace QuickBiteBE.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-          if (_context.Users == null)
-          {
-              return NotFound();
-          }
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
+
             var user = await _context.Users.FindAsync(id);
 
             if (user == null)
@@ -85,10 +88,11 @@ namespace QuickBiteBE.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-          if (_context.Users == null)
-          {
-              return Problem("Entity set 'QuickBiteContext.User'  is null.");
-          }
+            if (_context.Users == null)
+            {
+                return Problem("Entity set 'QuickBiteContext.User'  is null.");
+            }
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -103,6 +107,7 @@ namespace QuickBiteBE.Controllers
             {
                 return NotFound();
             }
+
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {

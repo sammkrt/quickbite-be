@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using QuickBiteBE.Services;
+using QuickBiteBE.Services.Interfaces;
 
 namespace QuickBiteBE.Controllers;
 

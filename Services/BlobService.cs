@@ -1,6 +1,7 @@
 using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Mvc;
 using QuickBiteBE.Services;
+using QuickBiteBE.Services.Interfaces;
 
 namespace saltagram.Api.Services;
 

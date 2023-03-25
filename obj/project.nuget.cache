@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "B+R/LhcdPC3MzGec+XFalJ6mBy+/4TEEY8n1GUNKHqv3/bceVvVwRgyGBAYJLj1edVu0ZQYKeC2OgSMMvLdJOQ==",
+  "dgSpecHash": "d9ZcTRdr/FWhzYt8X6VO9K3xtvqoYOkCmU/GkZtt8p5TTt9qywsQolosjbXfhO/8WmGRLZPyISminjVBvsR8UA==",
   "success": true,
-  "projectFilePath": "/Users/salt-dev/Desktop/FinalProject-Quickbite/QuickBiteBE/QuickBiteBE.csproj",
+  "projectFilePath": "/Users/salt-dev/Documents/Final Project/finalProjectTogether/quickbite-be/QuickBiteBE.csproj",
   "expectedPackageFiles": [
     "/Users/salt-dev/.nuget/packages/azure.core/1.30.0/azure.core.1.30.0.nupkg.sha512",
     "/Users/salt-dev/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",
