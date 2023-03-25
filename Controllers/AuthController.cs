@@ -17,7 +17,7 @@ public class AuthController : Controller
         _repository = repository;
         _jwtService = jwtService;
     }
-    [HttpPost]
+    [HttpPost("register")]
     public IActionResult Register(RegisterDto dto)
     {
         var user = new User
