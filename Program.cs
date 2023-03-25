@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using QuickBiteBE.Data;
+using QuickBiteBE.Helpers;
 using QuickBiteBE.Services;
 using saltagram.Api.Services;
 
@@ -13,11 +14,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IBlobService, BlobService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IJWTService, JWTService>();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowOrigin", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-});
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("AllowOrigin", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+// });
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -29,7 +33,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("AllowOrigin");
+// app.UseCors("AllowOrigin");
+app.UseCors(options =>
+    options.WithOrigins(new[] { "http://localhost:3000" }).AllowCredentials().AllowAnyHeader().AllowAnyHeader());
 app.UseAuthorization();
 
 app.MapControllers();
