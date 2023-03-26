@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/salt-dev/Desktop/FinalProject-Quickbite/QuickBiteBE/QuickBiteBE.csproj": {}
+    "/Users/salt-dev/Desktop/FinalProject-Quickbite/quickbite-be/QuickBiteBE.csproj": {}
   },
   "projects": {
-    "/Users/salt-dev/Desktop/FinalProject-Quickbite/QuickBiteBE/QuickBiteBE.csproj": {
+    "/Users/salt-dev/Desktop/FinalProject-Quickbite/quickbite-be/QuickBiteBE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/salt-dev/Desktop/FinalProject-Quickbite/QuickBiteBE/QuickBiteBE.csproj",
+        "projectUniqueName": "/Users/salt-dev/Desktop/FinalProject-Quickbite/quickbite-be/QuickBiteBE.csproj",
         "projectName": "QuickBiteBE",
-        "projectPath": "/Users/salt-dev/Desktop/FinalProject-Quickbite/QuickBiteBE/QuickBiteBE.csproj",
+        "projectPath": "/Users/salt-dev/Desktop/FinalProject-Quickbite/quickbite-be/QuickBiteBE.csproj",
         "packagesPath": "/Users/salt-dev/.nuget/packages/",
-        "outputPath": "/Users/salt-dev/Desktop/FinalProject-Quickbite/QuickBiteBE/obj/",
+        "outputPath": "/Users/salt-dev/Desktop/FinalProject-Quickbite/quickbite-be/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/salt-dev/.nuget/NuGet/NuGet.Config"
