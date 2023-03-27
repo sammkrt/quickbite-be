@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace QuickBiteBE.Migrations
 {
     [DbContext(typeof(QuickBiteContext))]
-    partial class QuickBiteContextModelSnapshot : ModelSnapshot
+    [Migration("20230327083052_vladMigrationsFifth")]
+    partial class vladMigrationsFifth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,22 +23,6 @@ namespace QuickBiteBE.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("QuickBiteBE.Models.Cart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Carts");
-                });
 
             modelBuilder.Entity("QuickBiteBE.Models.CartDish", b =>
                 {
@@ -45,13 +32,7 @@ namespace QuickBiteBE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<int>("DishId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -59,11 +40,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
-
                     b.HasIndex("DishId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("CartDishes");
                 });
@@ -119,31 +96,6 @@ namespace QuickBiteBE.Migrations
                     b.ToTable("Dishes");
                 });
 
-            modelBuilder.Entity("QuickBiteBE.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("QuickBiteBE.Models.Restaurant", b =>
                 {
                     b.Property<int>("Id")
@@ -196,9 +148,6 @@ namespace QuickBiteBE.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -221,26 +170,16 @@ namespace QuickBiteBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
-
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.CartDish", b =>
                 {
-                    b.HasOne("QuickBiteBE.Models.Cart", null)
-                        .WithMany("CartDishes")
-                        .HasForeignKey("CartId");
-
                     b.HasOne("QuickBiteBE.Models.Dish", "Dish")
                         .WithMany()
                         .HasForeignKey("DishId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("QuickBiteBE.Models.Order", null)
-                        .WithMany("Dishes")
-                        .HasForeignKey("OrderId");
 
                     b.Navigation("Dish");
                 });
@@ -260,42 +199,9 @@ namespace QuickBiteBE.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("QuickBiteBE.Models.Order", b =>
-                {
-                    b.HasOne("QuickBiteBE.Models.User", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("QuickBiteBE.Models.User", b =>
-                {
-                    b.HasOne("QuickBiteBE.Models.Cart", "Cart")
-                        .WithMany()
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-                });
-
-            modelBuilder.Entity("QuickBiteBE.Models.Cart", b =>
-                {
-                    b.Navigation("CartDishes");
-                });
-
-            modelBuilder.Entity("QuickBiteBE.Models.Order", b =>
-                {
-                    b.Navigation("Dishes");
-                });
-
             modelBuilder.Entity("QuickBiteBE.Models.Restaurant", b =>
                 {
                     b.Navigation("Dishes");
-                });
-
-            modelBuilder.Entity("QuickBiteBE.Models.User", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
