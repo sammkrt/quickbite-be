@@ -1,15 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using QuickBiteBE.Services;
+using QuickBiteBE.Services.Interfaces;
 
 namespace QuickBiteBE.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ImagesController : ControllerBase
+public class PicturesController : ControllerBase
 {
     private IBlobService _blobService;
 
-    public ImagesController(IBlobService blobService)
+    public PicturesController(IBlobService blobService)
     {
         _blobService = blobService;
     }

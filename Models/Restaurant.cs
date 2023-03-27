@@ -12,5 +12,6 @@ public class Restaurant
     [Required] public string Email { get; set; }
     [Required] public double DeliveryCost { get; set; }
     [Required] public string MainPictureUrl { get; set; }
+    
     public List<Dish> Dishes { get; set; }
 }

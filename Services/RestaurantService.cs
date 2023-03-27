@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuickBiteBE.Controllers;
 using QuickBiteBE.Data;
+using QuickBiteBE.Dtos;
 using QuickBiteBE.Models;
 using QuickBiteBE.Services.Interfaces;
 
@@ -9,10 +11,13 @@ namespace QuickBiteBE.Services;
 public class RestaurantService : IRestaurantService
 {
     private QuickBiteContext _context { get; set; }
+    
+    private IBlobService BlobService { get; set; }
 
-    public RestaurantService(QuickBiteContext context)
+    public RestaurantService(QuickBiteContext context, IBlobService blobService)
     {
         _context = context;
+        BlobService = blobService;
     }
 
     public async Task<List<Restaurant>> GetAllRestaurants()
@@ -35,7 +40,7 @@ public class RestaurantService : IRestaurantService
     private IQueryable<Restaurant> QueryAllRestaurants()
         => _context.Restaurants;
 
-    public async Task<Restaurant> CreateRestaurant(AddRestaurantRequest request)
+    public async Task<Restaurant> CreateRestaurant(AddRestaurantRequest request, IFormFile file)
     {
         var restaurant = new Restaurant
         {
@@ -44,7 +49,7 @@ public class RestaurantService : IRestaurantService
             Location = request.Location,
             PhoneNumber = request.PhoneNumber,
             Email = request.Email,
-            MainPictureUrl = request.MainPictureUrl,
+            MainPictureUrl = await BlobService.UploadFileV2(file),
             DeliveryCost = request.DeliveryCost,
             Dishes = new List<Dish>()
         };

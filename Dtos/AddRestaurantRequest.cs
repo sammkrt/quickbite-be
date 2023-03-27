@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using QuickBiteBE.Models;
 
-namespace QuickBiteBE.Controllers;
+namespace QuickBiteBE.Dtos;
 
 public class AddRestaurantRequest
 {
@@ -11,5 +10,5 @@ public class AddRestaurantRequest
     [Required] public string PhoneNumber { get; set; }
     [Required] public string Email { get; set; }
     [Required] public double DeliveryCost { get; set; }
-    [Required] public string MainPictureUrl { get; set; }
+    [Required] public IFormFile MainPictureUrl { get; set; }
 }

@@ -3,7 +3,6 @@ using QuickBiteBE.Data;
 using QuickBiteBE.Helpers;
 using QuickBiteBE.Services;
 using QuickBiteBE.Services.Interfaces;
-using saltagram.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<QuickBiteContext>(options =>

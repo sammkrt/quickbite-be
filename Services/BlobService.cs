@@ -1,8 +1,7 @@
 using Azure.Storage.Blobs;
-using Microsoft.AspNetCore.Mvc;
-using QuickBiteBE.Services;
+using QuickBiteBE.Services.Interfaces;
 
-namespace saltagram.Api.Services;
+namespace QuickBiteBE.Services;
 
 public class BlobService : IBlobService
 {
@@ -24,12 +23,27 @@ public class BlobService : IBlobService
 
         await using var stream = file.OpenReadStream();
         await blobClient.UploadAsync(stream, overwrite: true);
+        // ==> 
 
         return file;
     }
+
+    public async Task<string> UploadFileV2(IFormFile file)
+    {
+        var containerName = "quickbitecontainer";
+        var containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+        var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+        var blobClient = containerClient.GetBlobClient(fileName);
+
+        await using var stream = file.OpenReadStream();
+        await blobClient.UploadAsync(stream, overwrite: true);
+        // ==> 
+
+        return blobClient.Uri.ToString();
+    }
+    
     public async Task<List<string>> GetImageUrls()
     {
-        
         var containerName = "quickbitecontainer";
         var containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
 
@@ -46,6 +60,7 @@ public class BlobService : IBlobService
         return imageUrls;
     }
 
+
     public async Task DeleteFile(string fileName)
     {
         var containerName = "quickbitecontainer";
@@ -55,9 +70,4 @@ public class BlobService : IBlobService
 
         await blobClient.DeleteIfExistsAsync();
     }
-
-
-
-    
-    
 }
