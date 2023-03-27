@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using QuickBiteBE.Data;
 using QuickBiteBE.Helpers;
 using QuickBiteBE.Services;
-using saltagram.Api.Services;
+using QuickBiteBE.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<QuickBiteContext>(options =>
@@ -13,9 +13,13 @@ builder.Services.AddDbContext<QuickBiteContext>(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddScoped<IBlobService, BlobService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJWTService, JWTService>();
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+builder.Services.AddScoped<IDishService, DishService>();
+
 builder.Services.AddSwaggerGen();
 // builder.Services.AddCors(options =>
 // {

@@ -19,13 +19,10 @@ using QuickBiteBE.Models;
         public DbSet<Restaurant> Restaurants { get; set; } = default!;
         public DbSet<Order> Orders { get; set; } = default!;
         public DbSet<Cart> Carts { get; set; } = default!;
+        public DbSet<Picture> Pictures { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>(entity => { entity.HasIndex(e => e.Email).IsUnique(); });
-            // modelBuilder.Entity<User>()
-            //     .HasOne(user => user.Cart)
-            //     .WithOne()
-            //     .OnDelete(DeleteBehavior.Cascade);
         }
     }
