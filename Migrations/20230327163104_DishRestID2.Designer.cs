@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace QuickBiteBE.Migrations
 {
     [DbContext(typeof(QuickBiteContext))]
-    partial class QuickBiteContextModelSnapshot : ModelSnapshot
+    [Migration("20230327163104_DishRestID2")]
+    partial class DishRestID2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,92 +115,11 @@ namespace QuickBiteBE.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("RestaurantId");
 
                     b.ToTable("Dishes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            Description = "A selection of the best Dutch cheeses.",
-                            Name = "Dutch Cheese Platter",
-                            Price = 15.0,
-                            RestaurantId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 2,
-                            Description = "A delicious ice cream sundae topped with traditional Dutch stroopwafels.",
-                            Name = "Stroopwafel Sundae",
-                            Price = 8.0,
-                            RestaurantId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 3,
-                            Description = "Crispy, savory Dutch meatballs.",
-                            Name = "Bitterballen",
-                            Price = 6.0,
-                            RestaurantId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 3,
-                            Description = "Indonesian fried rice with vegetables and meat.",
-                            Name = "Nasi Goreng",
-                            Price = 12.0,
-                            RestaurantId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 4,
-                            Description = "Tender marinated meat skewers with peanut sauce.",
-                            Name = "Satay Skewers",
-                            Price = 10.0,
-                            RestaurantId = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 5,
-                            Description = "A refreshing Indonesian salad with peanut sauce dressing.",
-                            Name = "Gado-Gado Salad",
-                            Price = 8.0,
-                            RestaurantId = 2
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 3,
-                            Description = "A classic pizza topped with tomato sauce, mozzarella, and fresh basil.",
-                            Name = "Margherita Pizza",
-                            Price = 10.0,
-                            RestaurantId = 3
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 5,
-                            Description = "A creamy pasta dish with pancetta and Parmesan cheese.",
-                            Name = "Spaghetti Carbonara",
-                            Price = 14.0,
-                            RestaurantId = 3
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CategoryId = 1,
-                            Description = "A decadent Italian dessert made with ladyfingers, espresso, and mascarpone cheese.",
-                            Name = "Tiramisu",
-                            Price = 8.0,
-                            RestaurantId = 3
-                        });
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.Order", b =>
@@ -280,41 +202,6 @@ namespace QuickBiteBE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Restaurants");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DeliveryCost = 4.0,
-                            Description = "Welcome to Amsterdam Cafe, where unique flavors meet!",
-                            Email = "info@amsterdamcafe.com",
-                            Location = "Amsterdam, Netherlands",
-                            MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/McDonald's2.png",
-                            Name = "Amsterdam Cafe",
-                            PhoneNumber = "+31 20 123 4567"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DeliveryCost = 5.0,
-                            Description = "Discover the rich and exotic flavors of Indonesian cuisine.",
-                            Email = "info@indonesiandelight.com",
-                            Location = "Amsterdam, Netherlands",
-                            MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/IndonesianDelight.webp",
-                            Name = "Indonesian Delight",
-                            PhoneNumber = "+31 20 456 7890"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DeliveryCost = 6.0,
-                            Description = "Authentic Italian cuisine made with the finest ingredients.",
-                            Email = "info@italianos.com",
-                            Location = "Amsterdam, Netherlands",
-                            MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Italinos.png",
-                            Name = "Italiano's",
-                            PhoneNumber = "+31 20 555 1212"
-                        });
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.User", b =>
@@ -383,13 +270,19 @@ namespace QuickBiteBE.Migrations
 
             modelBuilder.Entity("QuickBiteBE.Models.Dish", b =>
                 {
-                    b.HasOne("QuickBiteBE.Models.Restaurant", "Restaurant")
+                    b.HasOne("QuickBiteBE.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QuickBiteBE.Models.Restaurant", null)
                         .WithMany("Dishes")
                         .HasForeignKey("RestaurantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Restaurant");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.Order", b =>
