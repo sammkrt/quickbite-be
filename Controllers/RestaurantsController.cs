@@ -42,15 +42,37 @@ public class RestaurantsController : ControllerBase
         return restaurantFromDb;
     }
 
+    // [HttpPost]
+    // public async Task<ActionResult> AddRestaurant(AddRestaurantRequest request, IFormFile file)
+    // {
+    //     var uploadedRestaurant = await RestaurantService.CreateRestaurant(request, file);
+    //     if (uploadedRestaurant == null)
+    //     {
+    //         return BadRequest();
+    //     }
+    //
+    //     return Ok();
+    // }
+    
     [HttpPost]
-    public async Task<ActionResult> AddRestaurant(AddRestaurantRequest request, IFormFile file)
+    public async Task<ActionResult<Restaurant>> CreateRestaurant([FromForm]AddRestaurantRequest request,  IFormFile image)
     {
-        var uploadedRestaurant = await RestaurantService.CreateRestaurant(request, file);
-        if (uploadedRestaurant == null)
+        if (image != null && image.Length > 0 && !IsImageValid(image))
         {
-            return BadRequest();
+            return BadRequest("Invalid image format. Only PNG and JPG/JPEG are allowed.");
         }
 
-        return Ok();
+        var restaurant = await RestaurantService.CreateRestaurant(request, image);
+
+        return Ok(restaurant);
     }
+
+    private bool IsImageValid(IFormFile file)
+    {
+        var allowedExtensions = new[] { ".png", ".jpg", ".jpeg" };
+        var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+        return file != null && file.Length > 0 && allowedExtensions.Contains(fileExtension);
+    }
+
 }

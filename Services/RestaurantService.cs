@@ -74,14 +74,13 @@ public class RestaurantService : IRestaurantService
             DeliveryCost = request.DeliveryCost,
             Dishes = new List<Dish>()
         };
-
-  
+        
         if (image != null && image.Length > 0)
         {
             var containerName = "quickbitecontainer";
             var containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
 
-            var fileName = $"{restaurant.Name}-{DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")}{Path.GetExtension(image.FileName)}";
+            var fileName = $"{Guid.NewGuid().ToString()}{Path.GetExtension(image.FileName)}";
             var blobClient = containerClient.GetBlobClient(fileName);
             await blobClient.UploadAsync(image.OpenReadStream(), true);
 
@@ -92,4 +91,5 @@ public class RestaurantService : IRestaurantService
         await _context.SaveChangesAsync();
         return restaurant;
     }
+
 }

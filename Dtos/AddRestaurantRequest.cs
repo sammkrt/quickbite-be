@@ -10,5 +10,4 @@ public class AddRestaurantRequest
     [Required] public string PhoneNumber { get; set; }
     [Required] public string Email { get; set; }
     [Required] public double DeliveryCost { get; set; }
-    [Required] public IFormFile MainPictureUrl { get; set; }
 }
