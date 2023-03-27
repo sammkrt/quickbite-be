@@ -277,3 +277,4 @@
 /Users/salt-dev/Desktop/FinalProject-Quickbite/QuickBiteBE/bin/Debug/net7.0/Azure.Storage.Blobs.dll
 /Users/salt-dev/Desktop/FinalProject-Quickbite/QuickBiteBE/bin/Debug/net7.0/Azure.Storage.Common.dll
 /Users/salt-dev/Desktop/FinalProject-Quickbite/QuickBiteBE/bin/Debug/net7.0/System.IO.Hashing.dll
+/Users/salt-dev/Desktop/FinalProject-Quickbite/QuickBiteBE/bin/Debug/net7.0/BCrypt.Net-Next.dll
