@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.Build.Framework;
 using Newtonsoft.Json;
 
 namespace QuickBiteBE.Models;
@@ -5,8 +7,13 @@ namespace QuickBiteBE.Models;
 public class User
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+    [Required] public string FirstName { get; set; }
+    [Required] public string LastName { get; set; }
     public string Email { get; set; }
-    [JsonIgnore]
-    public string Password { get; set; }
+    [JsonIgnore] [Required] public string Password { get; set; }
+    [Required] public string Address { get; set; }
+    [Required] public string PhoneNumber { get; set; }
+    public int CartId { get; set; }
+    public Cart Cart { get; set; }
+    public List<Order> Orders { get; set; }
 }
