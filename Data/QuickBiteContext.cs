@@ -22,10 +22,10 @@ using QuickBiteBE.Models;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // modelBuilder.Entity<User>(entity => { entity.HasIndex(e => e.Email).IsUnique(); });
-            modelBuilder.Entity<User>()
-                .HasOne(user => user.Cart)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>(entity => { entity.HasIndex(e => e.Email).IsUnique(); });
+            // modelBuilder.Entity<User>()
+            //     .HasOne(user => user.Cart)
+            //     .WithOne()
+            //     .OnDelete(DeleteBehavior.Cascade);
         }
     }
