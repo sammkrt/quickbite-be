@@ -19,6 +19,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJWTService, JWTService>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IDishService, DishService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.AddSwaggerGen();
 // builder.Services.AddCors(options =>

@@ -34,7 +34,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.CartDish", b =>
@@ -65,7 +65,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("CartDishes");
+                    b.ToTable("CartDishes", (string)null);
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.Category", b =>
@@ -82,7 +82,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.Dish", b =>
@@ -114,7 +114,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasIndex("RestaurantId");
 
-                    b.ToTable("Dishes");
+                    b.ToTable("Dishes", (string)null);
 
                     b.HasData(
                         new
@@ -222,7 +222,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.Picture", b =>
@@ -239,7 +239,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pictures");
+                    b.ToTable("Pictures", (string)null);
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.Restaurant", b =>
@@ -279,7 +279,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Restaurants");
+                    b.ToTable("Restaurants", (string)null);
 
                     b.HasData(
                         new
@@ -359,7 +359,7 @@ namespace QuickBiteBE.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.CartDish", b =>
