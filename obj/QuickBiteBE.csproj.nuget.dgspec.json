@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/salt-dev/Documents/Final Project/finalProjectTogether/t2/quickbite-be/QuickBiteBE.csproj": {}
+    "/Users/salt-dev/Downloads/week11/be/quickbite-be/QuickBiteBE.csproj": {}
   },
   "projects": {
-    "/Users/salt-dev/Documents/Final Project/finalProjectTogether/t2/quickbite-be/QuickBiteBE.csproj": {
+    "/Users/salt-dev/Downloads/week11/be/quickbite-be/QuickBiteBE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/salt-dev/Documents/Final Project/finalProjectTogether/t2/quickbite-be/QuickBiteBE.csproj",
+        "projectUniqueName": "/Users/salt-dev/Downloads/week11/be/quickbite-be/QuickBiteBE.csproj",
         "projectName": "QuickBiteBE",
-        "projectPath": "/Users/salt-dev/Documents/Final Project/finalProjectTogether/t2/quickbite-be/QuickBiteBE.csproj",
+        "projectPath": "/Users/salt-dev/Downloads/week11/be/quickbite-be/QuickBiteBE.csproj",
         "packagesPath": "/Users/salt-dev/.nuget/packages/",
-        "outputPath": "/Users/salt-dev/Documents/Final Project/finalProjectTogether/t2/quickbite-be/obj/",
+        "outputPath": "/Users/salt-dev/Downloads/week11/be/quickbite-be/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/salt-dev/.nuget/NuGet/NuGet.Config"
@@ -20,6 +20,7 @@
           "net7.0"
         ],
         "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -102,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/7.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }
