@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using QuickBiteBE.Models;
 
 namespace QuickBiteBE.Data;
@@ -23,6 +24,10 @@ public class UserRepository : IUserRepository
     } 
     public User GetById(int id)
     {
-        return _context.Users.FirstOrDefault(u => u.Id == id);
+        return _context.Users
+            .Include(user => user.Cart)
+            .Include(user => user.Cart.CartDishes)
+            .Include(user => user.Orders)
+            .FirstOrDefault(u => u.Id == id);
     }
 }

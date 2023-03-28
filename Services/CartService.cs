@@ -54,11 +54,8 @@ public class CartService : ICartService
         await _context.SaveChangesAsync();
         return cartDishFromDb;
     }
-
-    public async void setTotalPrice(Cart cart)
-    {
-        
-    }
+    
+    
 }
 
 public interface ICartService
