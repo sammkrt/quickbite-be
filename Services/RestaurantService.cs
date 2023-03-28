@@ -42,7 +42,7 @@ public class RestaurantService : IRestaurantService
     }
 
     private IQueryable<Restaurant> QueryAllRestaurants()
-        => _context.Restaurants;
+        => _context.Restaurants.Include(r=>r.Dishes);
 
     // public async Task<Restaurant> CreateRestaurant(AddRestaurantRequest request, IFormFile file)
     // {

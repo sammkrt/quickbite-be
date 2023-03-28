@@ -15,5 +15,5 @@ public class Dish
     public double Price { get; set; }
 
     public int RestaurantId { get; set; }
-    public Restaurant Restaurant { get; set; }
+   
 }
