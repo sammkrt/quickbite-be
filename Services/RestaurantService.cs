@@ -13,7 +13,7 @@ public class RestaurantService : IRestaurantService
 {
     private QuickBiteContext _context { get; set; }
     private readonly BlobServiceClient _blobServiceClient;
-    
+
     private IBlobService BlobService { get; set; }
 
     public RestaurantService(QuickBiteContext context, IBlobService blobService, IConfiguration configuration)
@@ -30,38 +30,24 @@ public class RestaurantService : IRestaurantService
     public Task<Restaurant> GetRestaurantById(int id)
         => _context.Restaurants.FirstAsync(restaurant => restaurant.Id == id);
 
+    public Task<Restaurant?> QueryRestaurantById(int id)
+        => _context.Restaurants.Include(r => r.Dishes)
+            .FirstOrDefaultAsync(restaurant => restaurant.Id == id);
+
     public async Task<List<Restaurant>> FilterRestaurantsBySearchBar(string input)
     {
         var restaurants =
             (from restaurant in await QueryAllRestaurants().ToListAsync()
                 from dish in restaurant.Dishes
-                where dish.Name == input
+                where dish.Name.ToLower().Contains(input.ToLower())
                 select restaurant)
             .ToList();
         return restaurants;
     }
 
     private IQueryable<Restaurant> QueryAllRestaurants()
-        => _context.Restaurants.Include(r=>r.Dishes);
+        => _context.Restaurants.Include(r => r.Dishes);
 
-    // public async Task<Restaurant> CreateRestaurant(AddRestaurantRequest request, IFormFile file)
-    // {
-    //     var restaurant = new Restaurant
-    //     {
-    //         Name = request.Name,
-    //         Description = request.Description,
-    //         Location = request.Location,
-    //         PhoneNumber = request.PhoneNumber,
-    //         Email = request.Email,
-    //         MainPictureUrl = await BlobService.UploadFileV2(file),
-    //         DeliveryCost = request.DeliveryCost,
-    //         Dishes = new List<Dish>()
-    //     };
-    //     _context.Restaurants.Add(restaurant);
-    //     await _context.SaveChangesAsync();
-    //     return restaurant;
-    // }
-    
     public async Task<Restaurant> CreateRestaurant(AddRestaurantRequest request, IFormFile image)
     {
         var restaurant = new Restaurant
@@ -74,22 +60,16 @@ public class RestaurantService : IRestaurantService
             DeliveryCost = request.DeliveryCost,
             Dishes = new List<Dish>()
         };
-        
-        if (image != null && image.Length > 0)
+
+        if (image == null || image.Length <= 0)
         {
-            var containerName = "quickbitecontainer";
-            var containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
-
-            var fileName = $"{Guid.NewGuid().ToString()}{Path.GetExtension(image.FileName)}";
-            var blobClient = containerClient.GetBlobClient(fileName);
-            await blobClient.UploadAsync(image.OpenReadStream(), true);
-
-            restaurant.MainPictureUrl = blobClient.Uri.ToString();
+            return null;
         }
+
+        restaurant.MainPictureUrl = await BlobService.UploadFileV2(image);
 
         _context.Restaurants.Add(restaurant);
         await _context.SaveChangesAsync();
         return restaurant;
     }
-
 }
