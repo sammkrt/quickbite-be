@@ -61,9 +61,14 @@ public class CartService : ICartService
 
         await _context.SaveChangesAsync();
         return cartDishFromDb;
+    } 
+    
+    public async Task RemoveDishFromCart(int userId, int dishId) // TODO 
+    {
+        
+        
+        await _context.SaveChangesAsync();
     }
-    
-    
 
     public Task EmptyCart(Cart cart)
     {

@@ -19,4 +19,19 @@ public class UserService : IUserService
             .Include(user => user.Cart.CartDishes)
             .Include(user => user.Orders)
             .FirstOrDefaultAsync(user => user.Id == id);
+
+    public async Task<User> QueryUserByIdV2(int id)
+    {
+        var userFromDb = await _context.Users
+            .Include(user => user.Cart)
+            .Include(user => user.Cart.CartDishes)
+            .Include(user => user.Orders)
+            .FirstOrDefaultAsync(user => user.Id == id);
+        if (userFromDb == null)
+        {
+            throw new ArgumentException("User not found.");
+        }
+
+        return userFromDb;
+    }
 }

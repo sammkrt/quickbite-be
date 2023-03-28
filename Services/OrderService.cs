@@ -26,11 +26,8 @@ public class OrderService : IOrderService
 
     public async Task<Order> PlaceOrder(int userId, string address)
     {
-        var user = await _userService.QueryUserById(userId);
-        if (user == null)
-        {
-            throw new ArgumentException("User not found.");
-        }
+        var user = await _userService.QueryUserByIdV2(userId);
+        
 
         var cart = user.Cart;
 
