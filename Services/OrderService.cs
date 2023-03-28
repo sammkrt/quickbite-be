@@ -36,7 +36,7 @@ public class OrderService : IOrderService
         };
 
         user.Orders.Add(order);
-        _cartService.EmptyCart(cart);
+        await _cartService.EmptyCart(cart);
         
         await _context.SaveChangesAsync();
         
