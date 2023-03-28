@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace QuickBiteBE.Migrations
 {
     [DbContext(typeof(QuickBiteContext))]
-    partial class QuickBiteContextModelSnapshot : ModelSnapshot
+    [Migration("20230327164820_SeedData")]
+    partial class SeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -383,11 +386,13 @@ namespace QuickBiteBE.Migrations
 
             modelBuilder.Entity("QuickBiteBE.Models.Dish", b =>
                 {
-                    b.HasOne("QuickBiteBE.Models.Restaurant", null)
+                    b.HasOne("QuickBiteBE.Models.Restaurant", "Restaurant")
                         .WithMany("Dishes")
                         .HasForeignKey("RestaurantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.Order", b =>
