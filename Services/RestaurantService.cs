@@ -5,6 +5,7 @@ using QuickBiteBE.Controllers;
 using QuickBiteBE.Data;
 using QuickBiteBE.Dtos;
 using QuickBiteBE.Models;
+using QuickBiteBE.Models.Requests;
 using QuickBiteBE.Services.Interfaces;
 
 namespace QuickBiteBE.Services;

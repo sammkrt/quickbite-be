@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace QuickBiteBE.Dtos;
+namespace QuickBiteBE.Models.Requests;
 
 public class AddRestaurantRequest
 {

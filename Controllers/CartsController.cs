@@ -23,7 +23,7 @@ public class CartsController : ControllerBase
     {
         var query = await CartService.QueryCartById(id);
 
-        if (id == null || query == null)
+        if (query == null)
             return NotFound();
 
         return query;
@@ -33,6 +33,3 @@ public class CartsController : ControllerBase
     public async Task<ActionResult<CartDish>> AddDishToCart(int userId, [FromBody] AddDishToCartRequest request)
         => await CartService.AddDishToCart(userId, request);
 }
-
-// delete dish from cart
-// 
