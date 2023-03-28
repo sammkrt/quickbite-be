@@ -22,8 +22,6 @@ public class RestaurantsController : ControllerBase
     public async Task<ActionResult<List<Restaurant>>> GetAllRestaurants() =>
         
         await RestaurantService.GetAllRestaurants();
-    
-    // Check if Empty. If empty, return BadRequest
 
     [HttpGet]
     [Route("search")]

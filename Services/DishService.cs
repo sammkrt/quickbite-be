@@ -16,8 +16,7 @@ public class DishService : IDishService
     public Task<Dish?> QueryDishById(int id)
         => _context.Dishes.FirstOrDefaultAsync(dish => dish.Id == id);
 
-    public async Task<List<Dish>>
-        GetAllDishes() // Doesn't really make a lot of sense. The restaurants already hold all the Dishes.
+    public async Task<List<Dish>> GetAllDishes() // Doesn't really make a lot of sense. The restaurants already hold all the Dishes.
         => await QueryAllDishes().ToListAsync();
 
     private IQueryable<Dish> QueryAllDishes()

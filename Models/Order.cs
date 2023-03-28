@@ -7,5 +7,6 @@ public class Order
     public int Id { get; set; }
     [Required] public List<CartDish> Dishes { get; set; }
     [Required] public string Address { get; set; }
+    [Required] public int UserId { get; set; }
     public double TotalPrice { get; set; }
 }
