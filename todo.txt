@@ -1,0 +1,10 @@
+- Seed data for Resstaurant, Dish and Category
+
+- Remove dish from cart
+
+- Set quantity of CartDish from cart
+
+!!!!!!!!!! : The price for delivery should be calculated only once (for each restaurant from which we order) !!!!!!!!!!!
+
+PAIN POINT : 
+- When ordering, we should calculate the delivery price not for every dish, -_-_-but for every restaurant-_-_-
