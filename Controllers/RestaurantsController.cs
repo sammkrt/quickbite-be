@@ -26,7 +26,7 @@ public class RestaurantsController : ControllerBase
     // Check if Empty. If empty, return BadRequest
 
     [HttpGet]
-    [Route("search/{input}")]
+    [Route("search")]
     public async Task<ActionResult<List<Restaurant>>> FilterRestaurantsFromSearch(string input)
         => await RestaurantService.FilterRestaurantsBySearchBar(input);
 
@@ -34,29 +34,14 @@ public class RestaurantsController : ControllerBase
     [Route("{id}")]
     public async Task<ActionResult<Restaurant>> GetRestaurantById(int id)
     {
-        if (id == null)
+        var query = await RestaurantService.QueryRestaurantById(id);
+        
+        if (id == null || query == null)
             return NotFound();
 
-        var restaurantFromDb = await RestaurantService.GetRestaurantById(id);
-
-        if (restaurantFromDb == null)
-            return NotFound();
-
-        return restaurantFromDb;
+        return query;
     }
 
-    // [HttpPost]
-    // public async Task<ActionResult> AddRestaurant(AddRestaurantRequest request, IFormFile file)
-    // {
-    //     var uploadedRestaurant = await RestaurantService.CreateRestaurant(request, file);
-    //     if (uploadedRestaurant == null)
-    //     {
-    //         return BadRequest();
-    //     }
-    //
-    //     return Ok();
-    // }
-    
     [HttpPost]
     public async Task<ActionResult<Restaurant>> CreateRestaurant([FromForm]AddRestaurantRequest request,  IFormFile image)
     {
@@ -77,5 +62,4 @@ public class RestaurantsController : ControllerBase
 
         return file != null && file.Length > 0 && allowedExtensions.Contains(fileExtension);
     }
-
 }
