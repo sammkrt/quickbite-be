@@ -32,3 +32,6 @@ public class CartsController : ControllerBase
     public async Task<ActionResult<CartDish>> AddDishToCart(int cartId, [FromBody] AddDishToCartRequest request)
         => await CartService.AddDishToCart(cartId, request);
 }
+
+// delete dish from cart
+// 
