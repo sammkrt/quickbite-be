@@ -54,7 +54,9 @@ public class AuthController : Controller
         var jwt = _jwtService.Generate(user.Id);
         Response.Cookies.Append("jwt", jwt, new CookieOptions
         {
-            HttpOnly = true
+            HttpOnly = true,
+            SameSite = SameSiteMode.Lax
+
         });
         return Ok(new
         {
