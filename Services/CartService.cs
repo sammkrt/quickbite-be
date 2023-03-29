@@ -10,20 +10,28 @@ public class CartService : ICartService
 {
     private QuickBiteContext _context { get; set; }
     private IDishService _DishService { get; set; }
+    private IUserService _userService { get; set; }
 
-    public CartService(QuickBiteContext context, IDishService dishService)
+    public CartService(QuickBiteContext context, IDishService dishService,IUserService userService)
     {
         _context = context;
         _DishService = dishService;
+        _userService = userService;
     }
 
     public Task<Cart?> QueryCartById(int id)
         => _context.Carts.Include(cart => cart.CartDishes)
             .FirstOrDefaultAsync(cart => cart.Id == id);
 
-    public async Task<CartDish> AddDishToCart(int cartId, AddDishToCartRequest request)
+    public async Task<CartDish> AddDishToCart(int userId, AddDishToCartRequest request)
     {
-        var cart = await QueryCartById(cartId);
+        var user = await _userService.QueryUserById(userId);
+        if (user == null)
+        {
+            throw new ArgumentException("User not found.");
+        }
+
+        var cart = user.Cart;
 
         var dish = await _DishService.QueryDishById(request.DishId);
 
@@ -53,13 +61,19 @@ public class CartService : ICartService
 
         await _context.SaveChangesAsync();
         return cartDishFromDb;
+    } 
+    
+    public async Task RemoveDishFromCart(int userId, int dishId) // TODO 
+    {
+        
+        
+        await _context.SaveChangesAsync();
     }
-    
-    
-}
 
-public interface ICartService
-{
-    Task<Cart?> QueryCartById(int id);
-    Task<CartDish> AddDishToCart(int cartId, AddDishToCartRequest request);
+    public Task EmptyCart(Cart cart)
+    {
+        cart.CartDishes = new List<CartDish>();
+        cart.TotalPrice = 0;
+        return Task.CompletedTask;
+    }
 }

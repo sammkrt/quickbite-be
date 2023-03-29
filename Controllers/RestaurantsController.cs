@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using QuickBiteBE.Dtos;
 using QuickBiteBE.Models;
+using QuickBiteBE.Models.Requests;
 using QuickBiteBE.Services.Interfaces;
 
 namespace QuickBiteBE.Controllers;
@@ -22,8 +23,6 @@ public class RestaurantsController : ControllerBase
     public async Task<ActionResult<List<Restaurant>>> GetAllRestaurants() =>
         
         await RestaurantService.GetAllRestaurants();
-    
-    // Check if Empty. If empty, return BadRequest
 
     [HttpGet]
     [Route("search")]

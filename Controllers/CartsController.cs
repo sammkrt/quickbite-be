@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuickBiteBE.Models;
 using QuickBiteBE.Models.Requests;
 using QuickBiteBE.Services;
+using QuickBiteBE.Services.Interfaces;
 
 namespace QuickBiteBE.Controllers;
 
@@ -22,16 +23,13 @@ public class CartsController : ControllerBase
     {
         var query = await CartService.QueryCartById(id);
 
-        if (id == null || query == null)
+        if (query == null)
             return NotFound();
 
         return query;
     }
 
     [HttpPost]
-    public async Task<ActionResult<CartDish>> AddDishToCart(int cartId, [FromBody] AddDishToCartRequest request)
-        => await CartService.AddDishToCart(cartId, request);
+    public async Task<ActionResult<CartDish>> AddDishToCart(int userId, [FromBody] AddDishToCartRequest request)
+        => await CartService.AddDishToCart(userId, request);
 }
-
-// delete dish from cart
-// 
