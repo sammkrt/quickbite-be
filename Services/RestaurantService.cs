@@ -35,6 +35,17 @@ public class RestaurantService : IRestaurantService
         => _context.Restaurants.Include(r => r.Dishes)
             .FirstOrDefaultAsync(restaurant => restaurant.Id == id);
 
+    public async Task<double> GetRestaurantDeliveryCost(int restaurantId)
+    {
+        var restaurant = await QueryRestaurantById(restaurantId);
+        if (restaurant == null)
+        {
+            throw new ArgumentException("Restaurant not found.");
+        }
+
+        return restaurant.DeliveryCost;
+    }
+
     public async Task<List<Restaurant>> FilterRestaurantsBySearchBar(string input)
     {
         var restaurants =

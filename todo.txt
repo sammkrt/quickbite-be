@@ -14,4 +14,4 @@ PAIN POINT :
 === === === === === === === === === === === === === === === === === === === === === === === === === === === === === === 
 
 Fix adding dish to cart and applying / (or not) delivery cost.
-
+When deleting, must calculate back the total price without the deleted items

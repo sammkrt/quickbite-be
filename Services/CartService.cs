@@ -12,14 +12,16 @@ public class CartService : ICartService
     private IDishService _DishService { get; set; }
     private IUserService _userService { get; set; }
     private IRestaurantService _restaurantService { get; set; }
+    private ICartDishService _cartDishService { get; set; }
 
     public CartService(QuickBiteContext context, IDishService dishService, IUserService userService,
-        IRestaurantService restaurantService)
+        IRestaurantService restaurantService, ICartDishService cartDishService)
     {
         _context = context;
         _DishService = dishService;
         _userService = userService;
         _restaurantService = restaurantService;
+        _cartDishService = cartDishService;
     }
 
     public Task<Cart?> QueryCartById(int id)
@@ -28,9 +30,9 @@ public class CartService : ICartService
 
     public async Task<CartDish> AddDishToCart(int userId, AddDishToCartRequest request)
     {
-        var user = await _userService.QueryUserById(userId);
-        var cart = user.Cart;
+        var cart = (await _userService.QueryUserById(userId)).Cart;
         var dish = await _DishService.QueryDishById(request.DishId);
+
         var cartDishFromDb = cart.CartDishes.SingleOrDefault(cartDish => cartDish.DishId == request.DishId);
 
         if (cartDishFromDb == null)
@@ -49,27 +51,57 @@ public class CartService : ICartService
             cartDishFromDb.Quantity += request.Quantity;
         }
 
-        var restaurantId = dish.RestaurantId;
-        if (!CheckIfCartContainsDishesFromRestaurant(cart, restaurantId))
-        {
-            var restaurant = await _restaurantService.GetRestaurantById(restaurantId);
-            var deliveryCost = restaurant.DeliveryCost;
-            cart.TotalPrice += dish.Price * request.Quantity + deliveryCost;
-        }
-        else
-        {
-            cart.TotalPrice += dish.Price * request.Quantity;
-        }
+        cart.TotalPrice += dish.Price * request.Quantity;
+        
+        // var restaurantId = dish.RestaurantId;
+        // if (CheckIfCartContainsDishesFromRestaurant(cart, restaurantId))
+        // {
+        //     cart.TotalPrice += dish.Price * request.Quantity;
+        // }
+
+        // else
+        // {
+        //     var deliveryCost = await _restaurantService.GetRestaurantDeliveryCost(restaurantId);
+        //     cart.TotalPrice += dish.Price * request.Quantity + deliveryCost;
+        // }
 
         await _context.SaveChangesAsync();
-        return cartDishFromDb;
+        return cartDishFromDb; // something is not getting saved in this one.
     }
 
-    private static bool CheckIfCartContainsDishesFromRestaurant(Cart cart, int restaurantId) // TODO
-        => cart.CartDishes.Exists(dish => dish.RestaurantId == restaurantId);
+    // private static bool CheckIfCartContainsDishesFromRestaurant(Cart cart, int restaurantId) // Always returns true
+    //     => cart.CartDishes.Any(cartDish => cartDish.RestaurantId == restaurantId);
 
-    public async Task RemoveDishFromCart(int userId, int dishId) // TODO 
+    public async Task RemoveDishFromCart(int userId, int dishId)
     {
+        var cart = (await _userService.QueryUserById(userId)).Cart;
+
+        var cartDishFromDb = cart.CartDishes.SingleOrDefault(cartDish => cartDish.DishId == dishId);
+        if (cartDishFromDb == null)
+        {
+            throw new ArgumentException("Cart dish not found -------------------------.");
+        }
+
+        var dish = await _DishService.QueryDishById(dishId);
+
+        cart.CartDishes.Remove(cartDishFromDb);
+
+        // var restaurantId = dish.RestaurantId;
+        // if (CheckIfCartContainsDishesFromRestaurant(cart, restaurantId))
+        // {
+        //     cart.TotalPrice -= dish.Price * cartDishFromDb.Quantity;
+        // }
+        // else
+        // {
+        //     var deliveryCost = await _restaurantService.GetRestaurantDeliveryCost(restaurantId);
+        //     cart.TotalPrice -= dish.Price * cartDishFromDb.Quantity + deliveryCost;
+        // }
+
+        cart.TotalPrice -= dish.Price * cartDishFromDb.Quantity;
+
+
+        _cartDishService.RemoveCartDish(cartDishFromDb);
+
         await _context.SaveChangesAsync();
     }
 
