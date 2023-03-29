@@ -8,3 +8,10 @@
 
 PAIN POINT : 
 - When ordering, we should calculate the delivery price not for every dish, -_-_-but for every restaurant-_-_-
+
+
+
+=== === === === === === === === === === === === === === === === === === === === === === === === === === === === === === 
+
+Fix adding dish to cart and applying / (or not) delivery cost.
+

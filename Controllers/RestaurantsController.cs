@@ -54,7 +54,7 @@ public class RestaurantsController : ControllerBase
         return Ok(restaurant);
     }
 
-    private bool IsImageValid(IFormFile file)
+    private static bool IsImageValid(IFormFile file)
     {
         var allowedExtensions = new[] { ".png", ".jpg", ".jpeg" };
         var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
