@@ -10,18 +10,18 @@ namespace QuickBiteBE.Controllers;
 [ApiController]
 public class CartsController : ControllerBase
 {
-    private ICartService CartService { get; set; }
+    private ICartService _cartService { get; set; }
 
     public CartsController(ICartService cartService)
     {
-        CartService = cartService;
+        _cartService = cartService;
     }
 
     [HttpGet]
     [Route("{id}")]
     public async Task<ActionResult<Cart>> GetCartById(int id)
     {
-        var query = await CartService.QueryCartById(id);
+        var query = await _cartService.QueryCartById(id);
 
         if (query == null)
             return NotFound();
@@ -31,5 +31,9 @@ public class CartsController : ControllerBase
 
     [HttpPost]
     public async Task<ActionResult<CartDish>> AddDishToCart(int userId, [FromBody] AddDishToCartRequest request)
-        => await CartService.AddDishToCart(userId, request);
+        => await _cartService.AddDishToCart(userId, request);
+
+    [HttpDelete]
+    public async Task RemoveDishFromCart(int userId, int dishId) 
+        => await _cartService.RemoveDishFromCart(userId, dishId);
 }

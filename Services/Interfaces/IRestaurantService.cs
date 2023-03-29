@@ -12,4 +12,5 @@ public interface IRestaurantService
     Task<Restaurant?> QueryRestaurantById(int id);
     Task<List<Restaurant>> FilterRestaurantsBySearchBar(string input);
     Task<Restaurant> CreateRestaurant(AddRestaurantRequest request, IFormFile file);
+    Task<double> GetRestaurantDeliveryCost(int restaurantId);
 }

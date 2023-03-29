@@ -19,11 +19,11 @@ public class DishesController : ControllerBase
     [Route("{id}")]
     public async Task<ActionResult<Dish>> GetRestaurantById(int id)
     {
-        var query = await DishService.QueryDishById(id);
+        var dish = await DishService.QueryDishById(id);
 
-        if (id == null || query == null)
+        if (id == null || dish == null)
             return NotFound();
 
-        return query;
+        return dish;
     }
 }

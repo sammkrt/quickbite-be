@@ -13,10 +13,18 @@ public class DishService : IDishService
         _context = context;
     }
 
-    public Task<Dish?> QueryDishById(int id)
-        => _context.Dishes.FirstOrDefaultAsync(dish => dish.Id == id);
+    public async Task<Dish> QueryDishById(int id)
+    {
+        var dishFromDb = await _context.Dishes.FirstOrDefaultAsync(dish => dish.Id == id);
+        if (dishFromDb == null)
+        {
+            throw new ArgumentException("Dish not found.");
+        }
 
-    public async Task<List<Dish>> GetAllDishes() // Doesn't really make a lot of sense. The restaurants already hold all the Dishes.
+        return dishFromDb;
+    }
+
+    public async Task<List<Dish>> GetAllDishes() 
         => await QueryAllDishes().ToListAsync();
 
     private IQueryable<Dish> QueryAllDishes()
