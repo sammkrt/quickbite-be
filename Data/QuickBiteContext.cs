@@ -23,6 +23,7 @@ using QuickBiteBE.Models;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             modelBuilder.Entity<User>(entity => { entity.HasIndex(e => e.Email).IsUnique(); });
 
             ModelBuilderExtensions.Seed(modelBuilder);
@@ -90,7 +91,7 @@ using QuickBiteBE.Models;
                     }
                     
                 );
-
+                
                 modelBuilder.Entity<Dish>().HasData(
                     new Dish
                     {

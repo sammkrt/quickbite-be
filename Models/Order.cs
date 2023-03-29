@@ -8,5 +8,6 @@ public class Order
     [Required] public List<CartDish> Dishes { get; set; }
     [Required] public string Address { get; set; }
     [Required] public int UserId { get; set; }
+    [Required] public User User { get; set; }
     public double TotalPrice { get; set; }
 }
