@@ -42,7 +42,7 @@ using QuickBiteBE.Models;
                         PhoneNumber = "+31 20 123 4567",
                         Email = "info@amsterdamcafe.com",
                         DeliveryCost = 4.0,
-                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/McDonald's2.png",
+                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Amsterdam_Cafe.png",
                     },
                     new Restaurant
                     {
@@ -65,7 +65,30 @@ using QuickBiteBE.Models;
                         Email = "info@italianos.com",
                         DeliveryCost = 6.0,
                         MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Italinos.png",
+                    },
+                    new Restaurant
+                    {
+                        Id = 4,
+                        Name = "Burger Joint",
+                        Description = "Juicy burgers made with fresh ingredients.",
+                        Location = "Amsterdam, Netherlands",
+                        PhoneNumber = "+31 20 789 1234",
+                        Email = "info@burgerjoint.com",
+                        DeliveryCost = 3.5,
+                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/burgerJoint.png",
+                    },
+                    new Restaurant
+                    {
+                        Id = 5,
+                        Name = "La Cocina Española",
+                        Description = "Experience the flavors of Spain with our authentic cuisine.",
+                        Location = "Amsterdam, Netherlands",
+                        PhoneNumber = "+31 20 987 6543",
+                        Email = "info@lacocinaespanola.com",
+                        DeliveryCost = 7.0,
+                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/LaCocina.png",
                     }
+                    
                 );
 
                 modelBuilder.Entity<Dish>().HasData(
@@ -122,6 +145,51 @@ using QuickBiteBE.Models;
                         Description =
                             "A decadent Italian dessert made with ladyfingers, espresso, and mascarpone cheese.",
                         Price = 8.0, RestaurantId = 3,CategoryId = 1
+                    },
+                    new Dish
+                    {
+                        Id = 10,
+                        Name = "Classic Burger",
+                        Description = "A juicy beef patty topped with cheese, lettuce, and tomato.",
+                        Price = 9.0,
+                        RestaurantId = 4,
+                        CategoryId = 6
+                    },
+                    new Dish
+                    {
+                        Id = 11,
+                        Name = "Veggie Burger",
+                        Description = "A vegetarian patty made with fresh vegetables and herbs.",
+                        Price = 8.0,
+                        RestaurantId = 4,
+                        CategoryId = 6
+                    },
+                    new Dish
+                    {
+                        Id = 12,
+                        Name = "Spanish Tortilla",
+                        Description = "A traditional Spanish omelette made with potatoes and onions.",
+                        Price = 10.0,
+                        RestaurantId = 5,
+                        CategoryId = 7
+                    },
+                    new Dish
+                    {
+                        Id = 13,
+                        Name = "Paella Valenciana",
+                        Description = "A classic Spanish rice dish with seafood and saffron.",
+                        Price = 18.0,
+                        RestaurantId = 5,
+                        CategoryId = 7
+                    },
+                    new Dish
+                    {
+                        Id = 14,
+                        Name = "Gazpacho",
+                        Description = "A refreshing chilled soup made with tomatoes and peppers.",
+                        Price = 7.0,
+                        RestaurantId = 5,
+                        CategoryId = 5
                     }
                 );
             }
