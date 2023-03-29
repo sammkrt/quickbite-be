@@ -58,7 +58,8 @@ public class AuthController : Controller
         });
         return Ok(new
         {
-            message = "success"
+            message = "success",
+            jwt = jwt
         });
     }
 
@@ -70,8 +71,8 @@ public class AuthController : Controller
             var jwt = Request.Cookies["jwt"];
 
             var token = _jwtService.Verify(jwt);
-            var userID = int.Parse(token.Issuer);
-            var user = _repository.GetById(userID);
+            var userId = int.Parse(token.Issuer);
+            var user = _repository.GetById(userId);
             return Ok(user);
         }
         catch (Exception _)
