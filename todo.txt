@@ -15,3 +15,15 @@ PAIN POINT :
 
 Fix adding dish to cart and applying / (or not) delivery cost.
 When deleting, must calculate back the total price without the deleted items
+
+=== === === === === === === === === === === === === === === === === === === === === === === === === === === === === === 
+
+var cartDishFromDb = cart.CartDishes.SingleOrDefault(cartDish => cartDish.DishId == request.DishId); <==> can be turned into one method that 
+=> public Task<CartDish> GetCartDishForUser(int userId, int dishId){...} 
+
+
+- When the user (in the cart) changes the quantity of CartDish to 0 and presses update, it gets deleted.
+
+- verifications for user input. Example: request.Quantity should always be greater or equal than 0.
+
+- CartDish should have a property: double cartDishPrice. would make the job easier and maybe cleaner. 

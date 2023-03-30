@@ -36,4 +36,8 @@ public class CartsController : ControllerBase
     [HttpDelete]
     public async Task RemoveDishFromCart(int userId, int dishId) 
         => await _cartService.RemoveDishFromCart(userId, dishId);
+
+    [HttpPatch]
+    public async Task<ActionResult<CartDish>> EditQuantityOfDishInCart([FromBody] EditCartDishQuantityRequest request)
+        => await _cartService.EditQuantityOfDishInCart(request);
 }
