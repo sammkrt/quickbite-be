@@ -13,21 +13,6 @@ public class UserService : IUserService
         _context = context;
     }
 
-    // public Task<User> QueryUserById(int id)
-    // {
-    //     var userFromDb = _context.Users
-    //         .Include(user => user.Cart)
-    //         .Include(user => user.Cart.CartDishes)
-    //         .Include(user => user.Orders)
-    //         .FirstOrDefaultAsync(user => user.Id == id);
-    //     if (userFromDb == null)
-    //     {
-    //         throw new ArgumentException("User not found.");
-    //     }
-    //
-    //     return userFromDb;
-    // }
-
     public async Task<User> QueryUserById(int id)
     {
         var userFromDb = await _context.Users

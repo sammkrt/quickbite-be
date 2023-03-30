@@ -17,10 +17,8 @@ public class RestaurantService : IRestaurantService
 
     private IBlobService BlobService { get; set; }
 
-    public RestaurantService(QuickBiteContext context, IBlobService blobService, IConfiguration configuration)
+    public RestaurantService(QuickBiteContext context, IBlobService blobService)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
-        _blobServiceClient = new BlobServiceClient(connectionString);
         _context = context;
         BlobService = blobService;
     }
@@ -28,23 +26,21 @@ public class RestaurantService : IRestaurantService
     public async Task<List<Restaurant>> GetAllRestaurants()
         => await QueryAllRestaurants().ToListAsync();
 
-    public Task<Restaurant> GetRestaurantById(int id)
-        => _context.Restaurants.FirstAsync(restaurant => restaurant.Id == id);
-
-    public Task<Restaurant?> QueryRestaurantById(int id)
-        => _context.Restaurants.Include(r => r.Dishes)
+    public async Task<Restaurant> QueryRestaurantById(int id)
+    {
+        var restaurant = await _context.Restaurants.Include(r => r.Dishes)
             .FirstOrDefaultAsync(restaurant => restaurant.Id == id);
 
-    public async Task<double> GetRestaurantDeliveryCost(int restaurantId)
-    {
-        var restaurant = await QueryRestaurantById(restaurantId);
         if (restaurant == null)
         {
             throw new ArgumentException("Restaurant not found.");
         }
 
-        return restaurant.DeliveryCost;
+        return restaurant;
     }
+
+    public async Task<double> GetRestaurantDeliveryCost(int restaurantId) 
+        => (await QueryRestaurantById(restaurantId)).DeliveryCost;
 
     public async Task<List<Restaurant>> FilterRestaurantsBySearchBar(string input)
     {
@@ -78,7 +74,7 @@ public class RestaurantService : IRestaurantService
             return null;
         }
 
-        restaurant.MainPictureUrl = await BlobService.UploadFileV2(image);
+        restaurant.MainPictureUrl = await BlobService.UploadFile(image);
 
         _context.Restaurants.Add(restaurant);
         await _context.SaveChangesAsync();
