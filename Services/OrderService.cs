@@ -27,7 +27,6 @@ public class OrderService : IOrderService
     public async Task<Order> PlaceOrder(int userId, string address)
     {
         var user = await _userService.QueryUserById(userId);
-        
 
         var cart = user.Cart;
 

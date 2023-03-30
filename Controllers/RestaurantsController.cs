@@ -31,20 +31,13 @@ public class RestaurantsController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    public async Task<ActionResult<Restaurant>> GetRestaurantById(int id)
-    {
-        var query = await RestaurantService.QueryRestaurantById(id);
-        
-        if (id == null || query == null)
-            return NotFound();
-
-        return query;
-    }
+    public async Task<ActionResult<Restaurant>> GetRestaurantById(int id) 
+        => await RestaurantService.QueryRestaurantById(id);
 
     [HttpPost]
     public async Task<ActionResult<Restaurant>> CreateRestaurant([FromForm]AddRestaurantRequest request,  IFormFile image)
     {
-        if (image != null && image.Length > 0 && !IsImageValid(image))
+        if (image is { Length: > 0 } && !IsImageValid(image))
         {
             return BadRequest("Invalid image format. Only PNG and JPG/JPEG are allowed.");
         }
@@ -59,6 +52,6 @@ public class RestaurantsController : ControllerBase
         var allowedExtensions = new[] { ".png", ".jpg", ".jpeg" };
         var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
 
-        return file != null && file.Length > 0 && allowedExtensions.Contains(fileExtension);
+        return file is { Length: > 0 } && allowedExtensions.Contains(fileExtension);
     }
 }

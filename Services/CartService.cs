@@ -41,7 +41,7 @@ public class CartService : ICartService
             {
                 DishId = request.DishId,
                 Quantity = request.Quantity,
-                RestaurantId = dish.RestaurantId // THIS
+                RestaurantId = dish.RestaurantId
             };
 
             cart.CartDishes.Add(cartDish);
@@ -53,24 +53,9 @@ public class CartService : ICartService
 
         cart.TotalPrice += dish.Price * request.Quantity;
 
-        // var restaurantId = dish.RestaurantId;
-        // if (CheckIfCartContainsDishesFromRestaurant(cart, restaurantId))
-        // {
-        //     cart.TotalPrice += dish.Price * request.Quantity;
-        // }
-
-        // else
-        // {
-        //     var deliveryCost = await _restaurantService.GetRestaurantDeliveryCost(restaurantId);
-        //     cart.TotalPrice += dish.Price * request.Quantity + deliveryCost;
-        // }
-
         await _context.SaveChangesAsync();
         return cartDishFromDb; // something is not getting saved in this one.
     }
-
-    // private static bool CheckIfCartContainsDishesFromRestaurant(Cart cart, int restaurantId) // Always returns true
-    //     => cart.CartDishes.Any(cartDish => cartDish.RestaurantId == restaurantId);
 
     public async Task RemoveDishFromCart(int userId, int dishId)
     {
@@ -86,22 +71,9 @@ public class CartService : ICartService
         var dish = await _DishService.QueryDishById(dishId);
         cart.CartDishes.Remove(cartDish);
 
-        // var restaurantId = dish.RestaurantId;
-        // if (CheckIfCartContainsDishesFromRestaurant(cart, restaurantId))
-        // {
-        //     cart.TotalPrice -= dish.Price * cartDishFromDb.Quantity;
-        // }
-        // else
-        // {
-        //     var deliveryCost = await _restaurantService.GetRestaurantDeliveryCost(restaurantId);
-        //     cart.TotalPrice -= dish.Price * cartDishFromDb.Quantity + deliveryCost;
-        // }
-
         cart.TotalPrice -= dish.Price * cartDish.Quantity;
 
         _cartDishService.RemoveCartDish(cartDish);
-
-        await _context.SaveChangesAsync();
     }
 
     private static CartDish? GetCartDishFromCart(Cart cart, int dishId)
@@ -115,7 +87,7 @@ public class CartService : ICartService
         }
     }
 
-    public async Task<CartDish> EditQuantityOfDishInCart(EditCartDishQuantityRequest request) // TODO 
+    public async Task<CartDish> EditQuantityOfDishInCart(EditCartDishQuantityRequest request)
     {
         var cart = (await _userService.QueryUserById(request.UserId)).Cart;
         var cartDish = GetCartDishFromCart(cart, request.DishId);
@@ -123,21 +95,20 @@ public class CartService : ICartService
         if (cartDish == null)
         {
             throw new ArgumentException("Cart dish not found.");
-            // ThrowExceptionIfCartDishIsNull(cartDish); // These two are the same but cleaner code. (not sure if it would work tho)
         }
 
         if (request.Quantity == 0)
         {
             await RemoveDishFromCart(request.UserId, request.DishId);
         }
-
-        var dish = await _DishService.QueryDishById(request.DishId);
-
-        var previousCartDishPrice = dish.Price * cartDish.Quantity;
-        var newCartDishPrice = dish.Price * request.Quantity;
-        cart.TotalPrice -= newCartDishPrice;
-
-        cartDish.Quantity = request.Quantity;
+        else
+        {
+            var dish = await _DishService.QueryDishById(request.DishId);
+            var oldPrice = dish.Price * cartDish.Quantity;
+            var newPrice = dish.Price * request.Quantity;
+            cart.TotalPrice = cart.TotalPrice - oldPrice + newPrice;
+            cartDish.Quantity = request.Quantity;
+        }
 
         await _context.SaveChangesAsync();
         return cartDish;

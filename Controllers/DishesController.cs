@@ -17,13 +17,6 @@ public class DishesController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    public async Task<ActionResult<Dish>> GetRestaurantById(int id)
-    {
-        var dish = await DishService.QueryDishById(id);
-
-        if (id == null || dish == null)
-            return NotFound();
-
-        return dish;
-    }
+    public async Task<ActionResult<Dish>> GetRestaurantById(int id) 
+        => await DishService.QueryDishById(id);
 }

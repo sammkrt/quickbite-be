@@ -1,0 +1,103 @@
+=== === === === === === === === === === === === === === === === === === === === === === === === === === === === === === === === 
+
+
+
+public async Task<CartDish> AddDishToCart(int userId, AddDishToCartRequest request)
+{
+    var cart = (await _userService.QueryUserById(userId)).Cart;
+    var dish = await _DishService.QueryDishById(request.DishId);
+
+    var cartDishFromDb = GetCartDishFromCart(cart, request.DishId);
+
+    if (cartDishFromDb == null)
+    {
+        var cartDish = new CartDish
+        {
+            DishId = request.DishId,
+            Quantity = request.Quantity,
+            RestaurantId = dish.RestaurantId // THIS
+        };
+
+        cart.CartDishes.Add(cartDish);
+    }
+    else
+    {
+        cartDishFromDb.Quantity += request.Quantity;
+    }
+
+    cart.TotalPrice += dish.Price * request.Quantity;
+
+    // var restaurantId = dish.RestaurantId;
+    // if (CheckIfCartContainsDishesFromRestaurant(cart, restaurantId))
+    // {
+    //     cart.TotalPrice += dish.Price * request.Quantity;
+    // }
+
+    // else
+    // {
+    //     var deliveryCost = await _restaurantService.GetRestaurantDeliveryCost(restaurantId);
+    //     cart.TotalPrice += dish.Price * request.Quantity + deliveryCost;
+    // }
+
+    await _context.SaveChangesAsync();
+    return cartDishFromDb; // something is not getting saved in this one.
+}
+
+
+=== === === === === === === === === === === === === === === === === === === === === === === === === === === === === === === === 
+
+
+
+// private static bool CheckIfCartContainsDishesFromRestaurant(Cart cart, int restaurantId) // Always returns true
+//     => cart.CartDishes.Any(cartDish => cartDish.RestaurantId == restaurantId);
+
+
+
+=== === === === === === === === === === === === === === === === === === === === === === === === === === === === === === === === 
+
+
+
+public async Task RemoveDishFromCart(int userId, int dishId)
+    {
+        var cart = (await _userService.QueryUserById(userId)).Cart;
+
+        var cartDish = GetCartDishFromCart(cart, dishId);
+
+        if (cartDish == null)
+        {
+            throw new ArgumentException("Cart dish not found.");
+        }
+
+        var dish = await _DishService.QueryDishById(dishId);
+        cart.CartDishes.Remove(cartDish);
+
+        // var restaurantId = dish.RestaurantId;
+        // if (CheckIfCartContainsDishesFromRestaurant(cart, restaurantId))
+        // {
+        //     cart.TotalPrice -= dish.Price * cartDishFromDb.Quantity;
+        // }
+        // else
+        // {
+        // var deliveryCost = await _restaurantService.GetRestaurantDeliveryCost(restaurantId);
+        //     cart.TotalPrice -= dish.Price * cartDishFromDb.Quantity + deliveryCost;
+        // }
+
+        cart.TotalPrice -= dish.Price * cartDish.Quantity;
+
+        _cartDishService.RemoveCartDish(cartDish);
+
+        await _context.SaveChangesAsync();
+    }
+
+
+    
+=== === === === === === === === === === === === === === === === === === === === === === === === === === === === === === === === 
+
+
+
+// private static void ThrowExceptionIfCartDishIsNull()
+// {
+//     throw new ArgumentException("Cart dish not found.");
+// }
+    
+    
