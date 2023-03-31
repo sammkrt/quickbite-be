@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using QuickBiteBE.Models;
+using QuickBiteBE.Models.Requests;
 using QuickBiteBE.Services.Interfaces;
 
 namespace QuickBiteBE.Controllers;
@@ -8,7 +9,7 @@ namespace QuickBiteBE.Controllers;
 [ApiController]
 public class OrdersController : ControllerBase
 {
-    private IOrderService _orderService { get; set; }
+    private readonly IOrderService _orderService;
 
     public OrdersController(IOrderService orderService)
     {
@@ -16,8 +17,8 @@ public class OrdersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Order>> PlaceOrder(int userId, string address) 
-        => await _orderService.PlaceOrder(userId, address);
+    public async Task<ActionResult<Order>> PlaceOrder(PlaceOrderRequest request) 
+        => await _orderService.PlaceOrder(request);
 
     [HttpGet]
     public async Task<ActionResult<List<Order>>> GetAllOrdersByUserId(int userId)

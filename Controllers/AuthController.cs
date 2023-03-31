@@ -1,9 +1,9 @@
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Mvc;
 using QuickBiteBE.Data;
-using QuickBiteBE.Dtos;
 using QuickBiteBE.Helpers;
 using QuickBiteBE.Models;
+using QuickBiteBE.Models.Requests;
 
 namespace QuickBiteBE.Controllers;
 
@@ -11,8 +11,8 @@ namespace QuickBiteBE.Controllers;
 [Route("[controller]")]
 public class AuthController : Controller
 {
-    private IUserRepository _repository;
-    private IJWTService _jwtService;
+    private readonly IUserRepository _repository;
+    private readonly IJWTService _jwtService;
 
     public AuthController(IUserRepository repository, IJWTService jwtService)
     {
@@ -21,16 +21,16 @@ public class AuthController : Controller
     }
 
     [HttpPost("register")]
-    public IActionResult Register(RegisterDto dto)
+    public IActionResult Register(RegisterRequest request)
     {
         var user = new User
         {
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            Email = dto.Email,
-            Address = dto.Address,
-            PhoneNumber = dto.PhoneNumber,
-            Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Email = request.Email,
+            Address = request.Address,
+            PhoneNumber = request.PhoneNumber,
+            Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
             Cart = new Cart(),
             Orders = new List<Order>()
         };
@@ -38,15 +38,15 @@ public class AuthController : Controller
     }
 
     [HttpPost("login")]
-    public IActionResult Login(LoginDto dto)
+    public IActionResult Login(LoginRequest request)
     {
-        var user = _repository.GetByEmail(dto.Email);
+        var user = _repository.GetByEmail(request.Email);
         if (user == null)
         {
             return BadRequest(new { message = "Invalid Credentials" });
         }
 
-        if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
+        if (!BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
         {
             return BadRequest(new { message = "Invalid Credentials" });
         }

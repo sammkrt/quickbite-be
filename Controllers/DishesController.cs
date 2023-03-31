@@ -8,15 +8,15 @@ namespace QuickBiteBE.Controllers;
 [ApiController]
 public class DishesController : ControllerBase
 {
-    private IDishService DishService { get; set; }
+    private readonly IDishService _dishService;
 
     public DishesController(IDishService dishService)
     {
-        DishService = dishService;
+        _dishService = dishService;
     }
 
     [HttpGet]
     [Route("{id}")]
     public async Task<ActionResult<Dish>> GetRestaurantById(int id) 
-        => await DishService.QueryDishById(id);
+        => await _dishService.QueryDishById(id);
 }

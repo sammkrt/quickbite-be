@@ -1,6 +1,6 @@
-namespace QuickBiteBE.Dtos;
+namespace QuickBiteBE.Models.Requests;
 
-public class RegisterDto
+public class RegisterRequest
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

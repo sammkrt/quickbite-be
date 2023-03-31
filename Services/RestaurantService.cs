@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuickBiteBE.Controllers;
 using QuickBiteBE.Data;
-using QuickBiteBE.Dtos;
 using QuickBiteBE.Models;
 using QuickBiteBE.Models.Requests;
 using QuickBiteBE.Services.Interfaces;
@@ -12,15 +11,13 @@ namespace QuickBiteBE.Services;
 
 public class RestaurantService : IRestaurantService
 {
-    private QuickBiteContext _context { get; set; }
-    private readonly BlobServiceClient _blobServiceClient;
-
-    private IBlobService BlobService { get; set; }
+    private readonly QuickBiteContext _context;
+    private readonly IBlobService _blobService;
 
     public RestaurantService(QuickBiteContext context, IBlobService blobService)
     {
         _context = context;
-        BlobService = blobService;
+        _blobService = blobService;
     }
 
     public async Task<List<Restaurant>> GetAllRestaurants()
@@ -32,9 +29,7 @@ public class RestaurantService : IRestaurantService
             .FirstOrDefaultAsync(restaurant => restaurant.Id == id);
 
         if (restaurant == null)
-        {
             throw new ArgumentException("Restaurant not found.");
-        }
 
         return restaurant;
     }
@@ -69,15 +64,21 @@ public class RestaurantService : IRestaurantService
             Dishes = new List<Dish>()
         };
 
-        if (image == null || image.Length <= 0)
-        {
-            return null;
-        }
+        if (!IsImageValid(image))
+            throw new ArgumentException("Invalid image format. Only PNG and JPG/JPEG are allowed.");
 
-        restaurant.MainPictureUrl = await BlobService.UploadFile(image);
+        restaurant.MainPictureUrl = await _blobService.UploadFile(image);
 
         _context.Restaurants.Add(restaurant);
         await _context.SaveChangesAsync();
         return restaurant;
+    }
+    
+    private static bool IsImageValid(IFormFile file)
+    {
+        var allowedExtensions = new[] { ".png", ".jpg", ".jpeg" };
+        var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+        return file is { Length: > 0 } && allowedExtensions.Contains(fileExtension);
     }
 }

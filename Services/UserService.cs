@@ -6,14 +6,14 @@ namespace QuickBiteBE.Services;
 
 public class UserService : IUserService
 {
-    private QuickBiteContext _context { get; set; }
+    private readonly QuickBiteContext _context;
 
     public UserService(QuickBiteContext context)
     {
         _context = context;
     }
 
-    public async Task<User> QueryUserById(int id)
+    public async Task<User> GetUserById(int id)
     {
         var userFromDb = await _context.Users
             .Include(user => user.Cart)
@@ -22,9 +22,7 @@ public class UserService : IUserService
             .FirstOrDefaultAsync(user => user.Id == id);
 
         if (userFromDb == null)
-        {
             throw new ArgumentException("User not found.");
-        }
 
         return userFromDb;
     }

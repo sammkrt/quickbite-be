@@ -6,7 +6,7 @@ namespace QuickBiteBE.Services;
 
 public class DishService : IDishService
 {
-    private QuickBiteContext _context { get; set; }
+    private readonly QuickBiteContext _context;
 
     public DishService(QuickBiteContext context)
     {
@@ -15,17 +15,13 @@ public class DishService : IDishService
 
     public async Task<Dish> QueryDishById(int id)
     {
-        var dishFromDb = await _context.Dishes.FirstOrDefaultAsync(dish => dish.Id == id);
+        var dishFromDb = await QueryAllDishes().FirstOrDefaultAsync(dish => dish.Id == id);
+        
         if (dishFromDb == null)
-        {
             throw new ArgumentException("Dish not found.");
-        }
 
         return dishFromDb;
     }
-
-    public async Task<List<Dish>> GetAllDishes() 
-        => await QueryAllDishes().ToListAsync();
 
     private IQueryable<Dish> QueryAllDishes()
         => _context.Dishes;

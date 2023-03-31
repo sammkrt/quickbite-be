@@ -27,4 +27,6 @@ var cartDishFromDb = cart.CartDishes.SingleOrDefault(cartDish => cartDish.DishId
 - CartDish should have a property: double cartDishPrice. would make the job easier and maybe cleaner. 
 
 === === === === === === === === === === === === === === === === === === === === === === === === === === === === === === 
--Make service properties readonly.
+- Make service properties readonly.
+- Change controllers from /api/controllerName ==> /controllerName.
+- Add DeliveryCost and subtotal. DishPrice * Quantity.

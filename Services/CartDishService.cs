@@ -6,7 +6,7 @@ namespace QuickBiteBE.Services;
 
 public class CartDishService : ICartDishService
 {
-    private QuickBiteContext _context { get; set; }
+    private readonly QuickBiteContext _context;
 
     public CartDishService(QuickBiteContext context)
     {
@@ -18,13 +18,10 @@ public class CartDishService : ICartDishService
     public async Task<CartDish> FindCartDish(int cartDishId)
     {
         var cartDishFromDb = await _context.CartDishes.FirstOrDefaultAsync(cartDish => cartDish.Id == cartDishId);
+        
         if (cartDishFromDb == null)
-        {
             throw new ArgumentException("Cart dish not found.");
-        }
 
         return cartDishFromDb;
     }
-
-    // public async Task<double> CalculateTotalPriceAfterRemovingDish(int userId, )
 }

@@ -1,15 +1,15 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using QuickBiteBE.Models;
+using QuickBiteBE.Models.Requests;
 using QuickBiteBE.Services.Interfaces;
 
 namespace QuickBiteBE.Services;
 
 public class OrderService : IOrderService
 {
-    private QuickBiteContext _context { get; set; }
-    private IUserService _userService { get; set; }
-    private ICartService _cartService { get; set; }
+    private readonly QuickBiteContext _context;
+    private readonly IUserService _userService;
+    private readonly ICartService _cartService;
 
     public OrderService(QuickBiteContext context, IUserService userService, ICartService cartService)
     {
@@ -24,25 +24,33 @@ public class OrderService : IOrderService
             .Where(order => order.UserId == userId)
             .ToListAsync();
 
-    public async Task<Order> PlaceOrder(int userId, string address)
+    public async Task<Order> PlaceOrder(PlaceOrderRequest request)
     {
-        var user = await _userService.QueryUserById(userId);
 
+        var user = await _userService.GetUserById(request.UserId);
         var cart = user.Cart;
+
+        ThrowIfCartIsEmpty(cart);
+        InputValidator.ValidateStringInputHasValue(request.Address, "Address must not be empty.");
 
         var order = new Order
         {
-            Address = address,
+            Address = request.Address,
             Dishes = cart.CartDishes,
             TotalPrice = cart.TotalPrice,
-            UserId = userId
+            UserId = request.UserId
         };
 
         user.Orders.Add(order);
         await _cartService.EmptyCart(cart);
-
         await _context.SaveChangesAsync();
 
         return order;
+    }
+
+    private static void ThrowIfCartIsEmpty(Cart cart)
+    {
+        if (cart.CartDishes.Count == 0)
+            throw new Exception("Cannot place an order if the cart is empty.");
     }
 }
