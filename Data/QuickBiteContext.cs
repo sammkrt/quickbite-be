@@ -95,56 +95,56 @@ using QuickBiteBE.Models;
                     new Dish
                     {
                         Id = 1, Name = "Dutch Cheese Platter", Description = "A selection of the best Dutch cheeses.",
-                        Price = 15.0, RestaurantId = 1,CategoryId = 1,PictureUrl = ""
+                        Price = 15.0, RestaurantId = 1,CategoryId = 1,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/DutchCheesePlate.jpeg"
                     },
                     new Dish
                     {
                         Id = 2, Name = "Stroopwafel Sundae",
                         Description = "A delicious ice cream sundae topped with traditional Dutch stroopwafels.",
                         Price = 8.0,
-                        RestaurantId = 1,CategoryId = 2,PictureUrl = ""
+                        RestaurantId = 1,CategoryId = 2,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/StroopWaffelSundae.jpeg"
                     },
                     new Dish
                     {
                         Id = 3, Name = "Bitterballen", Description = "Crispy, savory Dutch meatballs.", Price = 6.0,
-                        RestaurantId = 1,CategoryId = 3,PictureUrl = ""
+                        RestaurantId = 1,CategoryId = 3,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Bitterballen.jpeg"
                     },
                     new Dish
                     {
                         Id = 4, Name = "Nasi Goreng", Description = "Indonesian fried rice with vegetables and meat.",
-                        Price = 12.0, RestaurantId = 2,CategoryId = 3,PictureUrl = ""
+                        Price = 12.0, RestaurantId = 2,CategoryId = 3,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/nasiGoren.jpeg"
                     },
                     new Dish
                     {
                         Id = 5, Name = "Satay Skewers",
                         Description = "Tender marinated meat skewers with peanut sauce.",
-                        Price = 10.0, RestaurantId = 2,CategoryId = 4,PictureUrl = ""
+                        Price = 10.0, RestaurantId = 2,CategoryId = 4,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/SataySkewer.jpeg"
                     },
                     new Dish
                     {
                         Id = 6, Name = "Gado-Gado Salad",
                         Description = "A refreshing Indonesian salad with peanut sauce dressing.", Price = 8,
-                        RestaurantId = 2,CategoryId = 5,PictureUrl = ""
+                        RestaurantId = 2,CategoryId = 5,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/gadoGadoSalad.jpeg"
                     },
                     new Dish
                     {
                         Id = 7, Name = "Margherita Pizza",
                         Description = "A classic pizza topped with tomato sauce, mozzarella, and fresh basil.",
                         Price = 10.0,
-                        RestaurantId = 3,CategoryId = 3,PictureUrl = ""
+                        RestaurantId = 3,CategoryId = 3,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/MargaritaPizza.jpeg"
                     },
                     new Dish
                     {
                         Id = 8, Name = "Spaghetti Carbonara",
                         Description = "A creamy pasta dish with pancetta and Parmesan cheese.", Price = 14.0,
-                        RestaurantId = 3,CategoryId = 5,PictureUrl = ""
+                        RestaurantId = 3,CategoryId = 5,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/SpagettiCarbonora.jpeg"
                     },
                     new Dish
                     {
                         Id = 9, Name = "Tiramisu",
                         Description =
                             "A decadent Italian dessert made with ladyfingers, espresso, and mascarpone cheese.",
-                        Price = 8.0, RestaurantId = 3,CategoryId = 1,PictureUrl = ""
+                        Price = 8.0, RestaurantId = 3,CategoryId = 1,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Tiramisu.jpeg"
                     },
                     new Dish
                     {
@@ -153,7 +153,7 @@ using QuickBiteBE.Models;
                         Description = "A juicy beef patty topped with cheese, lettuce, and tomato.",
                         Price = 9.0,
                         RestaurantId = 4,
-                        CategoryId = 6,PictureUrl = ""
+                        CategoryId = 6,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/ClassicBurger.jpeg"
                     },
                     new Dish
                     {
@@ -162,7 +162,7 @@ using QuickBiteBE.Models;
                         Description = "A vegetarian patty made with fresh vegetables and herbs.",
                         Price = 8.0,
                         RestaurantId = 4,
-                        CategoryId = 6,PictureUrl = ""
+                        CategoryId = 6,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/VeggieBurger.jpeg"
                     },
                     new Dish
                     {
@@ -171,7 +171,7 @@ using QuickBiteBE.Models;
                         Description = "A traditional Spanish omelette made with potatoes and onions.",
                         Price = 10.0,
                         RestaurantId = 5,
-                        CategoryId = 7,PictureUrl = ""
+                        CategoryId = 7,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/SpanisTortilla.jpeg"
                     },
                     new Dish
                     {
@@ -180,7 +180,7 @@ using QuickBiteBE.Models;
                         Description = "A classic Spanish rice dish with seafood and saffron.",
                         Price = 18.0,
                         RestaurantId = 5,
-                        CategoryId = 7,PictureUrl = ""
+                        CategoryId = 7,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/PaellaValencia.jpeg"
                     },
                     new Dish
                     {
@@ -189,7 +189,7 @@ using QuickBiteBE.Models;
                         Description = "A refreshing chilled soup made with tomatoes and peppers.",
                         Price = 7.0,
                         RestaurantId = 5,
-                        CategoryId = 5,PictureUrl = ""
+                        CategoryId = 5,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Gazpacho.jpeg"
                     }
                 );
             }
