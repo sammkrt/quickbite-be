@@ -15,5 +15,6 @@ public class Dish
     public double Price { get; set; }
 
     public int RestaurantId { get; set; } // THIS
+    [Required]public string PictureUrl { get; set; }
    
 }

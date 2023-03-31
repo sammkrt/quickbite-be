@@ -12,4 +12,8 @@ public class CartDish
     [Required] public int OrderId { get; set; }
     [Required] public Order Order { get; set; }
     public int RestaurantId { get; set; } // THIS
+    [Required]public string PictureUrl { get; set; }
+    [Required] public double PricePerDish { get; set; }
+    [Required] public double TotalPrice { get; set; }
+    
 }

@@ -19,7 +19,6 @@ using QuickBiteBE.Models;
         public DbSet<Restaurant> Restaurants { get; set; } = default!;
         public DbSet<Order> Orders { get; set; } = default!;
         public DbSet<Cart> Carts { get; set; } = default!;
-        public DbSet<Picture> Pictures { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -96,56 +95,56 @@ using QuickBiteBE.Models;
                     new Dish
                     {
                         Id = 1, Name = "Dutch Cheese Platter", Description = "A selection of the best Dutch cheeses.",
-                        Price = 15.0, RestaurantId = 1,CategoryId = 1
+                        Price = 15.0, RestaurantId = 1,CategoryId = 1,PictureUrl = ""
                     },
                     new Dish
                     {
                         Id = 2, Name = "Stroopwafel Sundae",
                         Description = "A delicious ice cream sundae topped with traditional Dutch stroopwafels.",
                         Price = 8.0,
-                        RestaurantId = 1,CategoryId = 2
+                        RestaurantId = 1,CategoryId = 2,PictureUrl = ""
                     },
                     new Dish
                     {
                         Id = 3, Name = "Bitterballen", Description = "Crispy, savory Dutch meatballs.", Price = 6.0,
-                        RestaurantId = 1,CategoryId = 3
+                        RestaurantId = 1,CategoryId = 3,PictureUrl = ""
                     },
                     new Dish
                     {
                         Id = 4, Name = "Nasi Goreng", Description = "Indonesian fried rice with vegetables and meat.",
-                        Price = 12.0, RestaurantId = 2,CategoryId = 3
+                        Price = 12.0, RestaurantId = 2,CategoryId = 3,PictureUrl = ""
                     },
                     new Dish
                     {
                         Id = 5, Name = "Satay Skewers",
                         Description = "Tender marinated meat skewers with peanut sauce.",
-                        Price = 10.0, RestaurantId = 2,CategoryId = 4
+                        Price = 10.0, RestaurantId = 2,CategoryId = 4,PictureUrl = ""
                     },
                     new Dish
                     {
                         Id = 6, Name = "Gado-Gado Salad",
                         Description = "A refreshing Indonesian salad with peanut sauce dressing.", Price = 8,
-                        RestaurantId = 2,CategoryId = 5
+                        RestaurantId = 2,CategoryId = 5,PictureUrl = ""
                     },
                     new Dish
                     {
                         Id = 7, Name = "Margherita Pizza",
                         Description = "A classic pizza topped with tomato sauce, mozzarella, and fresh basil.",
                         Price = 10.0,
-                        RestaurantId = 3,CategoryId = 3
+                        RestaurantId = 3,CategoryId = 3,PictureUrl = ""
                     },
                     new Dish
                     {
                         Id = 8, Name = "Spaghetti Carbonara",
                         Description = "A creamy pasta dish with pancetta and Parmesan cheese.", Price = 14.0,
-                        RestaurantId = 3,CategoryId = 5
+                        RestaurantId = 3,CategoryId = 5,PictureUrl = ""
                     },
                     new Dish
                     {
                         Id = 9, Name = "Tiramisu",
                         Description =
                             "A decadent Italian dessert made with ladyfingers, espresso, and mascarpone cheese.",
-                        Price = 8.0, RestaurantId = 3,CategoryId = 1
+                        Price = 8.0, RestaurantId = 3,CategoryId = 1,PictureUrl = ""
                     },
                     new Dish
                     {
@@ -154,7 +153,7 @@ using QuickBiteBE.Models;
                         Description = "A juicy beef patty topped with cheese, lettuce, and tomato.",
                         Price = 9.0,
                         RestaurantId = 4,
-                        CategoryId = 6
+                        CategoryId = 6,PictureUrl = ""
                     },
                     new Dish
                     {
@@ -163,7 +162,7 @@ using QuickBiteBE.Models;
                         Description = "A vegetarian patty made with fresh vegetables and herbs.",
                         Price = 8.0,
                         RestaurantId = 4,
-                        CategoryId = 6
+                        CategoryId = 6,PictureUrl = ""
                     },
                     new Dish
                     {
@@ -172,7 +171,7 @@ using QuickBiteBE.Models;
                         Description = "A traditional Spanish omelette made with potatoes and onions.",
                         Price = 10.0,
                         RestaurantId = 5,
-                        CategoryId = 7
+                        CategoryId = 7,PictureUrl = ""
                     },
                     new Dish
                     {
@@ -181,7 +180,7 @@ using QuickBiteBE.Models;
                         Description = "A classic Spanish rice dish with seafood and saffron.",
                         Price = 18.0,
                         RestaurantId = 5,
-                        CategoryId = 7
+                        CategoryId = 7,PictureUrl = ""
                     },
                     new Dish
                     {
@@ -190,7 +189,7 @@ using QuickBiteBE.Models;
                         Description = "A refreshing chilled soup made with tomatoes and peppers.",
                         Price = 7.0,
                         RestaurantId = 5,
-                        CategoryId = 5
+                        CategoryId = 5,PictureUrl = ""
                     }
                 );
             }
