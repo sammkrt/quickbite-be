@@ -9,8 +9,7 @@ public class CartDish
     [Required] public int DishId { get; set; }
     [Required] public Dish Dish { get; set; }
     [Required] public int Quantity { get; set; }
-    [Required] public int OrderId { get; set; }
-    [Required] public Order Order { get; set; }
+
     public int RestaurantId { get; set; } // THIS
     [Required]public string PictureUrl { get; set; }
     [Required] public double PricePerDish { get; set; }
