@@ -59,7 +59,7 @@ public class CartService : ICartService
 
             cart.CartDishes.Add(cartDish);
 
-            cart.TotalPrice += dish.Price * request.Quantity;
+            cart.TotalPrice += newPrice;
 
             await _context.SaveChangesAsync();
             return cartDish;
@@ -67,7 +67,7 @@ public class CartService : ICartService
 
         cartDishFromDb.Quantity += request.Quantity;
 
-        cart.TotalPrice += dish.Price * request.Quantity;
+        cart.TotalPrice += newPrice;
 
         await _context.SaveChangesAsync();
         return cartDishFromDb;
