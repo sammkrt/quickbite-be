@@ -44,13 +44,17 @@ public class CartService : ICartService
 
         var cartDishFromDb = GetCartDishFromCart(cart, request.DishId);
 
+        var newPrice = dish.Price * request.Quantity;
+        
         if (cartDishFromDb == null)
         {
             var cartDish = new CartDish
             {
                 DishId = request.DishId,
                 Quantity = request.Quantity,
-                RestaurantId = dish.RestaurantId
+                RestaurantId = dish.RestaurantId,
+                PricePerDish = dish.Price,
+                TotalPrice = newPrice 
             };
 
             cart.CartDishes.Add(cartDish);
