@@ -31,11 +31,9 @@ public class OrderService : IOrderService
         var cart = user.Cart;
 
         ThrowIfCartIsEmpty(cart);
-        InputValidator.ValidateStringInputHasValue(request.Address, "Address must not be empty.");
 
         var order = new Order
         {
-            Address = request.Address,
             Dishes = cart.CartDishes,
             TotalPrice = cart.TotalPrice,
             UserId = request.UserId
