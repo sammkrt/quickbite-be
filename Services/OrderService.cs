@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using QuickBiteBE.Models;
 using QuickBiteBE.Models.Requests;
 using QuickBiteBE.Services.Interfaces;
@@ -26,7 +27,6 @@ public class OrderService : IOrderService
 
     public async Task<Order> PlaceOrder(PlaceOrderRequest request)
     {
-
         var user = await _userService.GetUserById(request.UserId);
         var cart = user.Cart;
 
@@ -34,6 +34,7 @@ public class OrderService : IOrderService
 
         var order = new Order
         {
+            Address = user.Address,
             Dishes = cart.CartDishes,
             TotalPrice = cart.TotalPrice,
             UserId = request.UserId
