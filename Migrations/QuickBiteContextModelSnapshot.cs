@@ -34,7 +34,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.CartDish", b =>
@@ -54,18 +54,29 @@ namespace QuickBiteBE.Migrations
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<string>("PictureUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PricePerDish")
+                        .HasColumnType("float");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<int>("RestaurantId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("DishId");
-
                     b.HasIndex("OrderId");
 
-                    b.ToTable("CartDishes", (string)null);
+                    b.ToTable("CartDishes");
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.Category", b =>
@@ -82,7 +93,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.Dish", b =>
@@ -104,6 +115,10 @@ namespace QuickBiteBE.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PictureUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -114,7 +129,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasIndex("RestaurantId");
 
-                    b.ToTable("Dishes", (string)null);
+                    b.ToTable("Dishes");
 
                     b.HasData(
                         new
@@ -123,6 +138,7 @@ namespace QuickBiteBE.Migrations
                             CategoryId = 1,
                             Description = "A selection of the best Dutch cheeses.",
                             Name = "Dutch Cheese Platter",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/DutchCheesePlate.jpeg",
                             Price = 15.0,
                             RestaurantId = 1
                         },
@@ -132,6 +148,7 @@ namespace QuickBiteBE.Migrations
                             CategoryId = 2,
                             Description = "A delicious ice cream sundae topped with traditional Dutch stroopwafels.",
                             Name = "Stroopwafel Sundae",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/StroopWaffelSundae.jpeg",
                             Price = 8.0,
                             RestaurantId = 1
                         },
@@ -141,6 +158,7 @@ namespace QuickBiteBE.Migrations
                             CategoryId = 3,
                             Description = "Crispy, savory Dutch meatballs.",
                             Name = "Bitterballen",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Bitterballen.jpeg",
                             Price = 6.0,
                             RestaurantId = 1
                         },
@@ -150,6 +168,7 @@ namespace QuickBiteBE.Migrations
                             CategoryId = 3,
                             Description = "Indonesian fried rice with vegetables and meat.",
                             Name = "Nasi Goreng",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/nasiGoren.jpeg",
                             Price = 12.0,
                             RestaurantId = 2
                         },
@@ -159,6 +178,7 @@ namespace QuickBiteBE.Migrations
                             CategoryId = 4,
                             Description = "Tender marinated meat skewers with peanut sauce.",
                             Name = "Satay Skewers",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/SataySkewer.jpeg",
                             Price = 10.0,
                             RestaurantId = 2
                         },
@@ -168,6 +188,7 @@ namespace QuickBiteBE.Migrations
                             CategoryId = 5,
                             Description = "A refreshing Indonesian salad with peanut sauce dressing.",
                             Name = "Gado-Gado Salad",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/gadoGadoSalad.jpeg",
                             Price = 8.0,
                             RestaurantId = 2
                         },
@@ -177,6 +198,7 @@ namespace QuickBiteBE.Migrations
                             CategoryId = 3,
                             Description = "A classic pizza topped with tomato sauce, mozzarella, and fresh basil.",
                             Name = "Margherita Pizza",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/MargaritaPizza.jpeg",
                             Price = 10.0,
                             RestaurantId = 3
                         },
@@ -186,6 +208,7 @@ namespace QuickBiteBE.Migrations
                             CategoryId = 5,
                             Description = "A creamy pasta dish with pancetta and Parmesan cheese.",
                             Name = "Spaghetti Carbonara",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/SpagettiCarbonora.jpeg",
                             Price = 14.0,
                             RestaurantId = 3
                         },
@@ -195,8 +218,59 @@ namespace QuickBiteBE.Migrations
                             CategoryId = 1,
                             Description = "A decadent Italian dessert made with ladyfingers, espresso, and mascarpone cheese.",
                             Name = "Tiramisu",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Tiramisu.jpeg",
                             Price = 8.0,
                             RestaurantId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryId = 6,
+                            Description = "A juicy beef patty topped with cheese, lettuce, and tomato.",
+                            Name = "Classic Burger",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/ClassicBurger.jpeg",
+                            Price = 9.0,
+                            RestaurantId = 4
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryId = 6,
+                            Description = "A vegetarian patty made with fresh vegetables and herbs.",
+                            Name = "Veggie Burger",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/VeggieBurger.jpeg",
+                            Price = 8.0,
+                            RestaurantId = 4
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryId = 7,
+                            Description = "A traditional Spanish omelette made with potatoes and onions.",
+                            Name = "Spanish Tortilla",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/SpanisTortilla.jpeg",
+                            Price = 10.0,
+                            RestaurantId = 5
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CategoryId = 7,
+                            Description = "A classic Spanish rice dish with seafood and saffron.",
+                            Name = "Paella Valenciana",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/PaellaValencia.jpeg",
+                            Price = 18.0,
+                            RestaurantId = 5
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CategoryId = 5,
+                            Description = "A refreshing chilled soup made with tomatoes and peppers.",
+                            Name = "Gazpacho",
+                            PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Gazpacho.jpeg",
+                            Price = 7.0,
+                            RestaurantId = 5
                         });
                 });
 
@@ -215,31 +289,14 @@ namespace QuickBiteBE.Migrations
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
-                });
-
-            modelBuilder.Entity("QuickBiteBE.Models.Picture", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Pictures", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.Restaurant", b =>
@@ -279,7 +336,7 @@ namespace QuickBiteBE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Restaurants", (string)null);
+                    b.ToTable("Restaurants");
 
                     b.HasData(
                         new
@@ -289,7 +346,7 @@ namespace QuickBiteBE.Migrations
                             Description = "Welcome to Amsterdam Cafe, where unique flavors meet!",
                             Email = "info@amsterdamcafe.com",
                             Location = "Amsterdam, Netherlands",
-                            MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/McDonald's2.png",
+                            MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Amsterdam_Cafe.png",
                             Name = "Amsterdam Cafe",
                             PhoneNumber = "+31 20 123 4567"
                         },
@@ -314,6 +371,28 @@ namespace QuickBiteBE.Migrations
                             MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Italinos.png",
                             Name = "Italiano's",
                             PhoneNumber = "+31 20 555 1212"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DeliveryCost = 3.5,
+                            Description = "Juicy burgers made with fresh ingredients.",
+                            Email = "info@burgerjoint.com",
+                            Location = "Amsterdam, Netherlands",
+                            MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/burgerJoint.png",
+                            Name = "Burger Joint",
+                            PhoneNumber = "+31 20 789 1234"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DeliveryCost = 7.0,
+                            Description = "Experience the flavors of Spain with our authentic cuisine.",
+                            Email = "info@lacocinaespanola.com",
+                            Location = "Amsterdam, Netherlands",
+                            MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/LaCocina.png",
+                            Name = "La Cocina Española",
+                            PhoneNumber = "+31 20 987 6543"
                         });
                 });
 
@@ -359,7 +438,7 @@ namespace QuickBiteBE.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.CartDish", b =>
@@ -368,17 +447,9 @@ namespace QuickBiteBE.Migrations
                         .WithMany("CartDishes")
                         .HasForeignKey("CartId");
 
-                    b.HasOne("QuickBiteBE.Models.Dish", "Dish")
-                        .WithMany()
-                        .HasForeignKey("DishId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("QuickBiteBE.Models.Order", null)
                         .WithMany("Dishes")
                         .HasForeignKey("OrderId");
-
-                    b.Navigation("Dish");
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.Dish", b =>
@@ -394,7 +465,9 @@ namespace QuickBiteBE.Migrations
                 {
                     b.HasOne("QuickBiteBE.Models.User", null)
                         .WithMany("Orders")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("QuickBiteBE.Models.User", b =>

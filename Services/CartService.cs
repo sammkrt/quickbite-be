@@ -54,7 +54,8 @@ public class CartService : ICartService
                 Quantity = request.Quantity,
                 RestaurantId = dish.RestaurantId,
                 PricePerDish = dish.Price,
-                TotalPrice = newPrice 
+                TotalPrice = newPrice ,
+                PictureUrl = dish.PictureUrl
             };
 
             cart.CartDishes.Add(cartDish);
@@ -66,7 +67,7 @@ public class CartService : ICartService
         }
 
         cartDishFromDb.Quantity += request.Quantity;
-
+        
         cart.TotalPrice += newPrice;
 
         await _context.SaveChangesAsync();
