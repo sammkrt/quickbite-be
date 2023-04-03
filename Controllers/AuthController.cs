@@ -1,4 +1,4 @@
-using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using QuickBiteBE.Data;
 using QuickBiteBE.Helpers;
@@ -9,10 +9,15 @@ namespace QuickBiteBE.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AuthController : Controller
+public partial class AuthController : Controller
 {
     private readonly IUserRepository _repository;
     private readonly IJWTService _jwtService;
+
+    [GeneratedRegex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]
+    private static partial Regex MailPattern();
+    [GeneratedRegex("/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/")]
+    private static partial Regex PasswordPattern();
 
     public AuthController(IUserRepository repository, IJWTService jwtService)
     {
@@ -23,6 +28,12 @@ public class AuthController : Controller
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest request)
     {
+        if (!MailPattern().IsMatch(request.Email))
+            throw new ArgumentException("Invalid mail.");
+        
+        if (!PasswordPattern().IsMatch(request.Password))
+            throw new ArgumentException("Invalid Password.");
+
         var user = new User
         {
             FirstName = request.FirstName,
@@ -56,12 +67,11 @@ public class AuthController : Controller
         {
             HttpOnly = true,
             SameSite = SameSiteMode.Lax
-
         });
         return Ok(new
         {
             message = "success",
-            jwt = jwt
+            jwt
         });
     }
 
