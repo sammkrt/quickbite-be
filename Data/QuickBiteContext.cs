@@ -42,7 +42,7 @@ using QuickBiteBE.Models;
                         PhoneNumber = "+31 20 123 4567",
                         Email = "info@amsterdamcafe.com",
                         DeliveryCost = 4.0,
-                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Amsterdam_Cafe.png",
+                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/amsterdam-cafe.jpg",
                     },
                     new Restaurant
                     {
@@ -53,7 +53,7 @@ using QuickBiteBE.Models;
                         PhoneNumber = "+31 20 456 7890",
                         Email = "info@indonesiandelight.com",
                         DeliveryCost = 5.0,
-                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/IndonesianDelight.webp",
+                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/indonesian-delight.jpg",
                     },
                     new Restaurant
                     {
@@ -64,7 +64,7 @@ using QuickBiteBE.Models;
                         PhoneNumber = "+31 20 555 1212",
                         Email = "info@italianos.com",
                         DeliveryCost = 6.0,
-                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Italinos.png",
+                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/italianos.jpg",
                     },
                     new Restaurant
                     {
@@ -75,7 +75,7 @@ using QuickBiteBE.Models;
                         PhoneNumber = "+31 20 789 1234",
                         Email = "info@burgerjoint.com",
                         DeliveryCost = 3.5,
-                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/burgerJoint.png",
+                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/burger-joint.jpg",
                     },
                     new Restaurant
                     {
@@ -86,7 +86,7 @@ using QuickBiteBE.Models;
                         PhoneNumber = "+31 20 987 6543",
                         Email = "info@lacocinaespanola.com",
                         DeliveryCost = 7.0,
-                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/LaCocina.png",
+                        MainPictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/la-cocina-espanola.jpg",
                     }
                     
                 );
@@ -95,56 +95,56 @@ using QuickBiteBE.Models;
                     new Dish
                     {
                         Id = 1, Name = "Dutch Cheese Platter", Description = "A selection of the best Dutch cheeses.",
-                        Price = 15.0, RestaurantId = 1,CategoryId = 1,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/DutchCheesePlate.jpeg"
+                        Price = 15.0, RestaurantId = 1,CategoryId = 1,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/amterdam-cafe-dutch-cheese-platter.jpg"
                     },
                     new Dish
                     {
                         Id = 2, Name = "Stroopwafel Sundae",
                         Description = "A delicious ice cream sundae topped with traditional Dutch stroopwafels.",
                         Price = 8.0,
-                        RestaurantId = 1,CategoryId = 2,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/StroopWaffelSundae.jpeg"
+                        RestaurantId = 1,CategoryId = 2,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/amterdam-cafe-stroopwafel-sundae.jpg"
                     },
                     new Dish
                     {
                         Id = 3, Name = "Bitterballen", Description = "Crispy, savory Dutch meatballs.", Price = 6.0,
-                        RestaurantId = 1,CategoryId = 3,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Bitterballen.jpeg"
+                        RestaurantId = 1,CategoryId = 3,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/amterdam-cafe-bitterballen.jpg"
                     },
                     new Dish
                     {
                         Id = 4, Name = "Nasi Goreng", Description = "Indonesian fried rice with vegetables and meat.",
-                        Price = 12.0, RestaurantId = 2,CategoryId = 3,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/nasiGoren.jpeg"
+                        Price = 12.0, RestaurantId = 2,CategoryId = 3,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/indonesian-delight-nasi-goren.jpg"
                     },
                     new Dish
                     {
                         Id = 5, Name = "Satay Skewers",
                         Description = "Tender marinated meat skewers with peanut sauce.",
-                        Price = 10.0, RestaurantId = 2,CategoryId = 4,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/SataySkewer.jpeg"
+                        Price = 10.0, RestaurantId = 2,CategoryId = 4,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/indonesian-delight-satay-skewers.jpg"
                     },
                     new Dish
                     {
                         Id = 6, Name = "Gado-Gado Salad",
                         Description = "A refreshing Indonesian salad with peanut sauce dressing.", Price = 8,
-                        RestaurantId = 2,CategoryId = 5,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/gadoGadoSalad.jpeg"
+                        RestaurantId = 2,CategoryId = 5,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/indonesian-delight-gado-gado-salad.jpg"
                     },
                     new Dish
                     {
                         Id = 7, Name = "Margherita Pizza",
                         Description = "A classic pizza topped with tomato sauce, mozzarella, and fresh basil.",
                         Price = 10.0,
-                        RestaurantId = 3,CategoryId = 3,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/MargaritaPizza.jpeg"
+                        RestaurantId = 3,CategoryId = 3,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/italianos-margherita-pizza.jpg"
                     },
                     new Dish
                     {
                         Id = 8, Name = "Spaghetti Carbonara",
                         Description = "A creamy pasta dish with pancetta and Parmesan cheese.", Price = 14.0,
-                        RestaurantId = 3,CategoryId = 5,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/SpagettiCarbonora.jpeg"
+                        RestaurantId = 3,CategoryId = 5,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/italianos-spaghetti-carbonara.jpg"
                     },
                     new Dish
                     {
                         Id = 9, Name = "Tiramisu",
                         Description =
                             "A decadent Italian dessert made with ladyfingers, espresso, and mascarpone cheese.",
-                        Price = 8.0, RestaurantId = 3,CategoryId = 1,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Tiramisu.jpeg"
+                        Price = 8.0, RestaurantId = 3,CategoryId = 1,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/italianos-tiramisu.jpg"
                     },
                     new Dish
                     {
@@ -153,7 +153,7 @@ using QuickBiteBE.Models;
                         Description = "A juicy beef patty topped with cheese, lettuce, and tomato.",
                         Price = 9.0,
                         RestaurantId = 4,
-                        CategoryId = 6,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/ClassicBurger.jpeg"
+                        CategoryId = 6,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/burger-joint-classic-burger.jpg"
                     },
                     new Dish
                     {
@@ -162,7 +162,7 @@ using QuickBiteBE.Models;
                         Description = "A vegetarian patty made with fresh vegetables and herbs.",
                         Price = 8.0,
                         RestaurantId = 4,
-                        CategoryId = 6,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/VeggieBurger.jpeg"
+                        CategoryId = 6,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/burger-joint-veggie-burger.jpg"
                     },
                     new Dish
                     {
@@ -171,7 +171,7 @@ using QuickBiteBE.Models;
                         Description = "A traditional Spanish omelette made with potatoes and onions.",
                         Price = 10.0,
                         RestaurantId = 5,
-                        CategoryId = 7,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/SpanisTortilla.jpeg"
+                        CategoryId = 7,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/la-cocina-espanola-spanish-tortilla.jpg"
                     },
                     new Dish
                     {
@@ -180,7 +180,7 @@ using QuickBiteBE.Models;
                         Description = "A classic Spanish rice dish with seafood and saffron.",
                         Price = 18.0,
                         RestaurantId = 5,
-                        CategoryId = 7,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/PaellaValencia.jpeg"
+                        CategoryId = 7,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/la-cocina-espanola-paella-valenciana.jpg"
                     },
                     new Dish
                     {
@@ -189,7 +189,17 @@ using QuickBiteBE.Models;
                         Description = "A refreshing chilled soup made with tomatoes and peppers.",
                         Price = 7.0,
                         RestaurantId = 5,
-                        CategoryId = 5,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/Gazpacho.jpeg"
+                        CategoryId = 5,PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/la-cocina-espanola-gazpacho.jpg"
+                    },
+                    new Dish
+                    {
+                        Id = 15,
+                        Name = "Banana Cake",
+                        Description = "A moist cake made with fresh bananas and a hint of cinnamon.",
+                        Price = 5.99,
+                        RestaurantId = 4,
+                        CategoryId = 3,
+                        PictureUrl = "https://quickbitestorage.blob.core.windows.net/quickbitecontainer/burger-joint-banana-cacke.jpg"
                     }
                 );
             }
