@@ -9,5 +9,6 @@ public class Dish
     [Required] public string Description { get; set; }
     [Required] public int CategoryId { get; set; }
     [Required] public double Price { get; set; }
+    [Required] public string PictureUrl { get; set; }
     public int RestaurantId { get; set; }
 }
