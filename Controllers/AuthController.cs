@@ -16,9 +16,6 @@ public partial class AuthController : Controller
 
     [GeneratedRegex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]
     private static partial Regex MailPattern();
-    [GeneratedRegex("/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/")]
-    private static partial Regex PasswordPattern();
-
     public AuthController(IUserRepository repository, IJWTService jwtService)
     {
         _repository = repository;
@@ -30,9 +27,7 @@ public partial class AuthController : Controller
     {
         if (!MailPattern().IsMatch(request.Email))
             throw new ArgumentException("Invalid mail.");
-        
-        if (!PasswordPattern().IsMatch(request.Password))
-            throw new ArgumentException("Invalid Password.");
+  
 
         var user = new User
         {
